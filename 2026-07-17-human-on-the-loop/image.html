@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>人在环上 · Human on the Loop</title>
+<style>
+  :root {
+    --bg: #faf7f2;
+    --ink: #1f1c18;
+    --ink-soft: #6b645b;
+    --accent: #d4441c;
+    --line: #e5ded3;
+    --muted-bg: #f0ece4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #ddd; }
+  .canvas {
+    width: 1080px;
+    height: 1440px;
+    margin: 40px auto;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "PingFang SC", "Hiragino Sans GB", sans-serif;
+    position: relative;
+    overflow: hidden;
+    padding: 88px 96px;
+    display: flex;
+    flex-direction: column;
+  }
+  /* 顶部细节：角标线 */
+  .canvas::before {
+    content: "";
+    position: absolute;
+    top: 48px; left: 48px; right: 48px; bottom: 48px;
+    border: 1px solid var(--line);
+    pointer-events: none;
+  }
+
+  .kicker {
+    font-size: 22px;
+    letter-spacing: 10px;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+  .title {
+    font-family: "Songti SC", "Noto Serif SC", serif;
+    font-weight: 900;
+    font-size: 104px;
+    line-height: 1.15;
+    letter-spacing: 4px;
+  }
+  .title .accent { color: var(--accent); }
+  .subtitle {
+    font-size: 30px;
+    color: var(--ink-soft);
+    margin-top: 18px;
+    letter-spacing: 2px;
+  }
+  .subtitle em {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* 主视觉：邮件式协作时间线 */
+  .timeline {
+    margin-top: 76px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    padding-left: 46px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 13px; top: 14px; bottom: 14px;
+    width: 2px;
+    background: var(--line);
+  }
+  .step {
+    display: flex;
+    align-items: baseline;
+    gap: 26px;
+    padding: 26px 0;
+    position: relative;
+  }
+  .step::before {
+    content: "";
+    position: absolute;
+    left: -41px; top: 40px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+  .step.mail::before,
+  .step.reply::before {
+    background: var(--accent);
+    width: 16px; height: 16px;
+    left: -43px;
+  }
+  .step .icon {
+    font-size: 40px;
+    width: 56px;
+    text-align: center;
+    flex-shrink: 0;
+    transform: translateY(4px);
+  }
+  .step .text { font-size: 36px; letter-spacing: 1px; }
+  .step .note {
+    font-size: 26px;
+    color: var(--ink-soft);
+    margin-left: auto;
+    letter-spacing: 1px;
+  }
+  .step.mail .text, .step.reply .text {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .step.busy .text strong {
+    font-weight: 700;
+    border-bottom: 4px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  /* HITL 角落对比卡片 */
+  .hitl {
+    position: absolute;
+    right: 96px;
+    bottom: 200px;
+    width: 330px;
+    background: var(--muted-bg);
+    border: 1px solid var(--line);
+    padding: 30px 32px;
+    color: var(--ink-soft);
+  }
+  .hitl .tag {
+    font-size: 20px;
+    letter-spacing: 4px;
+    margin-bottom: 14px;
+    color: #98917f;
+  }
+  .hitl .name {
+    font-family: "Songti SC", "Noto Serif SC", serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: #4a453d;
+    margin-bottom: 18px;
+  }
+  .hitl .row {
+    font-size: 24px;
+    line-height: 1.7;
+    display: flex;
+    gap: 12px;
+  }
+  .hitl .wait {
+    margin-top: 10px;
+    font-size: 22px;
+    color: #a39a87;
+    letter-spacing: 2px;
+  }
+
+  /* 底部署名 */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: auto;
+    padding-top: 40px;
+  }
+  .footer .sign {
+    font-family: "Songti SC", "Noto Serif SC", serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 3px;
+  }
+  .footer .sign::before {
+    content: "";
+    display: inline-block;
+    width: 40px; height: 4px;
+    background: var(--accent);
+    margin-right: 16px;
+    vertical-align: middle;
+  }
+  .footer .en {
+    font-size: 20px;
+    color: var(--ink-soft);
+    letter-spacing: 3px;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="kicker">AGENT 协作方式升级</div>
+  <div class="title">人在<span class="accent">环上</span></div>
+  <div class="subtitle">Human <em>on</em> the Loop · 没等你回，agent 先干别的</div>
+
+  <div class="timeline">
+    <div class="step">
+      <span class="icon">🤖</span>
+      <span class="text">Agent 处理任务 A</span>
+      <span class="note">进行中</span>
+    </div>
+    <div class="step mail">
+      <span class="icon">✉️</span>
+      <span class="text">遇到问题，给我发一封「邮件」</span>
+      <span class="note">异步询问</span>
+    </div>
+    <div class="step busy">
+      <span class="icon">⚙️</span>
+      <span class="text"><strong>不等回复</strong>，转头继续任务 B、C</span>
+      <span class="note">零空转</span>
+    </div>
+    <div class="step reply">
+      <span class="icon">💬</span>
+      <span class="text">我有空了回复，它再接上 A</span>
+      <span class="note">随时衔接</span>
+    </div>
+  </div>
+
+  <div class="hitl">
+    <div class="tag">对比 · 老方式</div>
+    <div class="name">人在环中</div>
+    <div class="row"><span>☎️</span><span>像打电话：<br>你不接，agent 干等</span></div>
+    <div class="wait">等待接听中 · · ·</div>
+  </div>
+
+  <div class="footer">
+    <div class="sign">Khan驾到</div>
+    <div class="en">HUMAN ON THE LOOP</div>
+  </div>
+</div>
+</body>
+</html>
