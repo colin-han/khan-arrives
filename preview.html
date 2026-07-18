@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>朋友圈预览 · Khan驾到</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing:antialiased; }
+  html,body {
+    background:#cfcfcf;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
+    color:#1a1a1a; min-height:100vh;
+  }
+  .page { display:flex; flex-direction:column; align-items:center; padding:24px 12px; }
+
+  .toolbar { margin-bottom:16px; display:flex; gap:8px; align-items:center; font-size:13px; color:#666; flex-wrap:wrap; justify-content:center; }
+  .toolbar select, .toolbar a.btn {
+    font:inherit; padding:6px 12px; border-radius:6px; border:1px solid #ccc;
+    background:#fff; color:#576b95; text-decoration:none; cursor:pointer;
+  }
+
+  /* ===== 手机框 9:20 ===== */
+  .phone {
+    width:360px; height:800px; background:#fff; border-radius:34px; overflow:hidden;
+    box-shadow:0 14px 50px rgba(0,0,0,.28); border:9px solid #111; position:relative;
+    display:flex; flex-direction:column;
+  }
+  /* 状态栏 */
+  .statusbar {
+    height:22px; background:#fff; display:flex; align-items:center; justify-content:space-between;
+    padding:0 18px; font-size:13px; font-weight:600; color:#1a1a1a; flex-shrink:0;
+  }
+  .statusbar .sig { letter-spacing:1px; font-size:11px; }
+  /* 导航栏 */
+  .navbar {
+    height:42px; display:flex; align-items:center; justify-content:center;
+    background:#fff; border-bottom:1px solid #ececec;
+    font-size:16px; font-weight:600; color:#1a1a1a; position:relative; flex-shrink:0;
+  }
+  .navbar .back { position:absolute; left:14px; font-size:26px; color:#1a1a1a; font-weight:300; line-height:1; }
+
+  /* 信息流（可滚动） */
+  .feed { flex:1; overflow-y:auto; background:#fff; }
+  .feed::-webkit-scrollbar{ display:none; }
+
+  .moment { display:flex; gap:10px; padding:14px 14px 6px; }
+  .avatar {
+    width:38px; height:38px; border-radius:8px; flex-shrink:0;
+    object-fit:cover; background:#eee;
+  }
+  .content { flex:1; min-width:0; }
+  .name { color:#576b95; font-size:14px; font-weight:600; }
+  .text { color:#1a1a1a; font-size:14px; line-height:1.46; margin-top:3px; white-space:pre-wrap; word-break:break-word; }
+
+  /* 配图单图（缩小） */
+  .thumb {
+    margin-top:7px; width:144px; height:192px; overflow:hidden;
+    border-radius:4px; position:relative; cursor:zoom-in; background:#faf7f2;
+  }
+  .thumb iframe {
+    width:1080px; height:1440px; border:0;
+    transform:scale(0.1333); transform-origin:top left; pointer-events:none;
+  }
+
+  /* 操作栏（时间 + 赞/评论按钮） */
+  .momentfoot { display:flex; justify-content:space-between; align-items:center; margin-top:8px; padding:0 0 12px; }
+  .time { color:#b2b2b2; font-size:12px; }
+  .actbtn { background:#f7f7f7; border-radius:3px; padding:4px 8px; display:flex; gap:10px; align-items:center; }
+  .actbtn svg { width:15px; height:15px; fill:#576b95; display:block; }
+
+  /* 点赞 + 评论块 */
+  .social { margin:0 14px 14px; background:#f7f7f7; border-radius:4px; padding:6px 10px; }
+  .social .arrow { /* 三角箭头指向操作栏，装饰 */ }
+  .likes { font-size:13px; line-height:1.5; color:#1a1a1a; display:flex; align-items:flex-start; gap:5px; padding:2px 0; }
+  .likes .heart { color:#576b95; font-size:13px; margin-top:1px; }
+  .likes .ln { color:#576b95; }
+  .likes .sep { color:#1a1a1a; }
+  .cdiv { height:1px; background:#e8e8e8; margin:5px 0; }
+  .comments { font-size:13px; line-height:1.55; }
+  .comments .c { padding:1px 0; }
+  .comments .cn { color:#576b95; }
+  .comments .ct { color:#1a1a1a; }
+
+  /* 底部评论输入框 */
+  .commentbar {
+    height:50px; border-top:1px solid #e3e3e3; background:#fff; flex-shrink:0;
+    display:flex; align-items:center; gap:10px; padding:0 12px;
+  }
+  .commentbar .cinput {
+    flex:1; height:32px; background:#f5f5f5; border-radius:4px; color:#aaa;
+    font-size:13px; display:flex; align-items:center; padding:0 12px;
+  }
+  .commentbar .cicons { display:flex; gap:14px; align-items:center; color:#576b95; font-size:18px; }
+
+  /* 全屏 overlay */
+  .overlay {
+    position:fixed; inset:0; background:rgba(0,0,0,.92); display:none;
+    align-items:center; justify-content:center; z-index:100; cursor:zoom-out;
+  }
+  .overlay.show { display:flex; }
+  .overlay .frame { transform-origin:center center; }
+  .overlay iframe { width:1080px; height:1440px; border:0; display:block; }
+  .overlay .close { position:fixed; top:16px; right:20px; color:#fff; font-size:30px; opacity:.7; }
+  .hint { font-size:12px; color:#888; margin-top:14px; max-width:360px; text-align:center; line-height:1.6; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="toolbar">
+    <span>话题：</span>
+    <select id="topicSel"></select>
+    <a class="btn" id="openSrc" href="#" target="_blank">打开原图 HTML</a>
+  </div>
+
+  <div class="phone">
+    <div class="statusbar"><span>9:41</span><span class="sig">●●● 5G ▮▮</span></div>
+    <div class="navbar"><span class="back">‹</span>朋友圈</div>
+
+    <div class="feed">
+      <div class="moment">
+        <img class="avatar" src="assets/avatar.png" alt="Khan驾到">
+        <div class="content">
+          <div class="name">Khan驾到</div>
+          <div class="text" id="text">加载中…</div>
+          <div class="thumb" id="thumb" title="点击全屏查看">
+            <iframe id="thumbFrame" src="about:blank"></iframe>
+          </div>
+          <div class="momentfoot">
+            <div class="time" id="time">1 分钟前</div>
+            <div class="actbtn">
+              <svg viewBox="0 0 24 24"><path d="M12 21l-1.5-1.4C5 14.6 2 11.9 2 8.5 2 6 4 4 6.5 4c1.5 0 3 .7 3.9 1.9L12 7l1.6-1.1C14.5 4.7 16 4 17.5 4 20 4 22 6 22 8.5c0 3.4-3 6.1-8.5 11.1L12 21z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M4 4h16v12H7l-3 3V4zm2 4h12v2H6V8zm0 4h8v2H6v-2z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="social">
+        <div class="likes"><span class="heart">♥</span><span><span class="ln">老王</span><span class="sep">、</span><span class="ln">Ada</span><span class="sep">、</span><span class="ln">木鱼</span></span></div>
+        <div class="cdiv"></div>
+        <div class="comments">
+          <div class="c"><span class="cn">老王</span>：<span class="ct">这个 /harness-learn 听着有点意思，回头试试</span></div>
+          <div class="c"><span class="cn">Ada</span>：<span class="ct">所以它记的是「怎么修」而不是「修了啥」？</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commentbar">
+      <div class="cinput">评论</div>
+      <div class="cicons"><span>☺</span><span>＠</span><span>▤</span></div>
+    </div>
+  </div>
+
+  <div class="hint" id="hint"></div>
+</div>
+
+<div class="overlay" id="overlay">
+  <span class="close">×</span>
+  <div class="frame"><iframe id="fullFrame" src="about:blank"></iframe></div>
+</div>
+
+<script>
+const TOPICS = ["2026-07-18-harness-learn","2026-07-17-human-on-the-loop"];
+const params = new URLSearchParams(location.search);
+let topic = params.get("topic") || TOPICS[0];
+
+const sel = document.getElementById("topicSel");
+TOPICS.forEach(t=>{
+  const o=document.createElement("option"); o.value=t; o.textContent=t.replace(/^\d{4}-\d{2}-\d{2}-/,"");
+  if(t===topic) o.selected=true; sel.appendChild(o);
+});
+sel.addEventListener("change",()=>{ location.search="?topic="+encodeURIComponent(sel.value); });
+document.getElementById("openSrc").href = topic+"/image.html";
+
+const srcHtml = topic+"/image.html";
+const srcText = topic+"/text.txt";
+
+fetch(srcText).then(r=>{ if(!r.ok) throw 0; return r.text(); })
+  .then(t=>{ document.getElementById("text").textContent = t.trim(); })
+  .catch(()=>{
+    document.getElementById("text").textContent = "（文案加载失败）";
+    document.getElementById("hint").textContent =
+      "需通过本地 server 打开以加载文案与图片：http://localhost:8765/preview.html?topic="+topic;
+  });
+
+document.getElementById("thumbFrame").src = srcHtml;
+
+const overlay=document.getElementById("overlay");
+const fullFrame=document.getElementById("fullFrame");
+const fullWrap=document.querySelector(".overlay .frame");
+function sizeFull(){
+  const pad=48;
+  const s=Math.min((innerWidth-pad)/1080,(innerHeight-pad)/1440);
+  fullWrap.style.transform="scale("+s+")";
+}
+document.getElementById("thumb").addEventListener("click",()=>{
+  fullFrame.src=srcHtml; sizeFull(); overlay.classList.add("show");
+});
+overlay.addEventListener("click",()=>{
+  overlay.classList.remove("show"); fullFrame.src="about:blank";
+});
+addEventListener("resize",()=>{ if(overlay.classList.contains("show")) sizeFull(); });
+</script>
+</body>
+</html>

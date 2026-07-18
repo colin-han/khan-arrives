@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Harness Learn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1440px;}
+  body{
+    background-color:#faf7f2;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#231709; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* 纸纹 */
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05; mix-blend-mode:multiply;
+  }
+  .page{position:relative; padding:100px 92px 150px; height:1440px; display:flex; flex-direction:column;}
+
+  /* 标题区 */
+  header{margin-bottom:56px;}
+  .kicker{font-size:26px; color:#b08968; letter-spacing:0.2em; margin-bottom:14px;}
+  .title{
+    font-family:"Ma Shan Zheng",cursive;
+    font-size:158px; line-height:1.02; color:#1c1a17; letter-spacing:0.04em;
+  }
+  .subtitle{
+    font-family:"SF Mono",Menlo,monospace; font-size:36px; color:#d4441c;
+    margin-top:20px; letter-spacing:0.02em;
+  }
+  .lede{font-size:33px; line-height:1.7; color:#4a4238; margin-top:26px; max-width:850px;}
+  .lede .hl{color:#d4441c;}
+
+  /* 流程 */
+  .steps{margin-top:20px; flex:1; display:flex; flex-direction:column; justify-content:space-evenly; align-items:flex-start;}
+  .step{display:flex; align-items:center; gap:30px; height:104px;}
+  .icon{width:92px; height:92px; flex-shrink:0;}
+  .stxt{font-size:37px; line-height:1.35; color:#231709;}
+  .stxt b{color:#d4441c; font-weight:700; margin-right:6px; font-size:38px;}
+  .stxt .em{color:#d4441c;}
+  .arrow{margin-left:42px;}
+
+  /* 署名 */
+  .sig{position:absolute; left:92px; bottom:70px; display:flex; align-items:center; gap:14px; font-family:"Songti SC",serif; font-weight:700; font-size:26px;}
+  .sig .bar{width:26px;height:2px;background:#d4441c;display:inline-block;}
+  .entag{position:absolute; right:92px; bottom:74px; font-size:20px; letter-spacing:0.32em; color:#9a9286;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="title">蒸馏老师傅</div>
+    <div class="subtitle">/harness-learn</div>
+    <div class="lede">把人解决问题时的<span class="hl">「为什么这么干」</span>记下来，喂给 AI。</div>
+  </header>
+
+  <div class="steps">
+    <div class="step">
+      <svg class="icon" viewBox="0 0 100 100" fill="none" stroke="#1c1a17" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="50" cy="56" rx="22" ry="26"/>
+        <line x1="50" y1="30" x2="43" y2="18"/><line x1="50" y1="30" x2="57" y2="18"/>
+        <line x1="29" y1="48" x2="14" y2="40"/><line x1="29" y1="64" x2="13" y2="66"/><line x1="31" y1="78" x2="16" y2="88"/>
+        <line x1="71" y1="48" x2="86" y2="40"/><line x1="71" y1="64" x2="87" y2="66"/><line x1="69" y1="78" x2="84" y2="88"/>
+        <line x1="50" y1="32" x2="50" y2="82"/>
+      </svg>
+      <div class="stxt"><b>①</b>修了个 bug</div>
+    </div>
+    <svg class="arrow" width="38" height="40" viewBox="0 0 38 40" fill="none" stroke="#d4441c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 4 L19 32 M8 24 L19 34 L30 24"/></svg>
+
+    <div class="step">
+      <svg class="icon" viewBox="0 0 100 100" fill="none" stroke="#1c1a17" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="50" cy="50" r="33"/>
+        <polygon points="42,36 42,64 66,50" fill="#d4441c" stroke="none"/>
+      </svg>
+      <div class="stxt"><b>②</b>skill 回顾整个修复过程<span class="em"> + 对话</span></div>
+    </div>
+    <svg class="arrow" width="38" height="40" viewBox="0 0 38 40" fill="none" stroke="#d4441c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 4 L19 32 M8 24 L19 34 L30 24"/></svg>
+
+    <div class="step">
+      <svg class="icon" viewBox="0 0 100 100" fill="none" stroke="#1c1a17" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="26" y="20" width="48" height="60" rx="5"/>
+        <line x1="36" y1="36" x2="64" y2="36"/>
+        <line x1="36" y1="50" x2="64" y2="50"/>
+        <line x1="36" y1="64" x2="54" y2="64"/>
+      </svg>
+      <div class="stxt"><b>③</b>把逻辑提炼成<span class="em">一条条规则</span></div>
+    </div>
+    <svg class="arrow" width="38" height="40" viewBox="0 0 38 40" fill="none" stroke="#d4441c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 4 L19 32 M8 24 L19 34 L30 24"/></svg>
+
+    <div class="step">
+      <svg class="icon" viewBox="0 0 100 100" fill="none" stroke="#1c1a17" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M74 50 a24 24 0 1 1 -7 -17"/>
+        <polyline points="64,28 69,37 60,40"/>
+      </svg>
+      <div class="stxt"><b>④</b>下次类似问题，AI <span class="em">自己就会了</span></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="sig"><span class="bar"></span>Khan驾到</div>
+<div class="entag">HARNESS · LEARN</div>
+</body>
+</html>
