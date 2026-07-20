@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>翻车与漂移</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1440px;}
+  body{
+    background-color:#faf7f2;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#231709; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* 纸纹 */
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05; mix-blend-mode:multiply;
+  }
+  .page{position:relative; padding:84px 92px 64px; height:1440px; display:flex; flex-direction:column;}
+
+  /* 标题区 */
+  header{margin-bottom:34px;}
+  .title{
+    font-family:"Ma Shan Zheng",cursive;
+    font-size:132px; line-height:1.05; color:#1c1a17; letter-spacing:0.04em;
+  }
+  .title .vs{font-size:70px; color:#b08968; margin:0 10px;}
+  .subtitle{
+    font-family:"SF Mono",Menlo,monospace; font-size:32px; color:#d4441c;
+    margin-top:16px; letter-spacing:0.04em;
+  }
+  .lede{font-size:32px; line-height:1.65; color:#4a4238; margin-top:20px;}
+  .lede .hl{color:#d4441c;}
+
+  /* 翻车小卡 */
+  .crash{
+    background:#f0ece4; border-radius:16px; padding:26px 30px;
+    display:flex; align-items:center; gap:24px; margin-bottom:18px;
+  }
+  .crash svg{flex-shrink:0;}
+  .crash .ctxt{font-size:29px; line-height:1.55; color:#5a5248;}
+  .crash .ctxt b{color:#231709; font-size:31px; margin-right:4px;}
+
+  /* 主图 */
+  .chart{flex:1; display:flex; align-items:center;}
+  .chart svg{width:100%; height:auto; display:block;}
+
+  /* 结语 */
+  .takeaway{
+    font-size:33px; line-height:1.6; color:#231709;
+    margin-top:8px; padding-top:22px; border-top:2px dashed #d8cfc0;
+  }
+  .takeaway .hl{color:#d4441c;}
+
+  /* 署名（流式） */
+  .foot{margin-top:26px; display:flex; justify-content:space-between; align-items:center;}
+  .sig{display:flex; align-items:center; gap:14px; font-family:"Songti SC",serif; font-weight:700; font-size:26px;}
+  .sig .bar{width:26px;height:2px;background:#d4441c;display:inline-block;}
+  .entag{font-size:20px; letter-spacing:0.32em; color:#9a9286;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="title">翻车<span class="vs">与</span>漂移</div>
+    <div class="subtitle">AI 编程的两种出错方式</div>
+    <div class="lede">一种当场炸响，一种<span class="hl">全程绿灯</span>。</div>
+  </header>
+
+  <div class="crash">
+    <svg width="110" height="82" viewBox="0 0 110 82" fill="none" stroke="#5a5248" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <!-- 四轮朝天的翻车 -->
+      <g>
+        <path d="M22 46 L26 34 Q28 28 35 28 L75 28 Q82 28 84 34 L88 46 Q90 52 84 52 L26 52 Q20 52 22 46 Z" fill="#f0ece4"/>
+        <path d="M40 28 L44 14 L68 14 L72 28" />
+        <line x1="55" y1="14" x2="55" y2="28"/>
+        <circle cx="36" cy="60" r="9"/>
+        <circle cx="74" cy="60" r="9"/>
+      </g>
+      <!-- 烟 -->
+      <path d="M14 34 Q10 28 14 22 Q18 16 14 10" stroke="#d4441c" stroke-width="3.5"/>
+      <path d="M96 30 Q100 24 96 18" stroke="#d4441c" stroke-width="3.5"/>
+      <path d="M8 78 L102 78" stroke-dasharray="3 8" stroke-width="3"/>
+    </svg>
+    <div class="ctxt"><b>翻车：</b>build 崩了、报错飘红——当场炸响，人人看得见。模型越强，翻得越少。</div>
+  </div>
+
+  <div class="chart">
+    <svg viewBox="0 -68 900 688" fill="none">
+      <!-- 目标路线：一条虚线车道 -->
+      <path d="M60 140 L810 118" stroke="#8a8074" stroke-width="3.5" stroke-dasharray="15 13"/>
+      <text x="62" y="104" font-size="26" fill="#8a8074">你想去的地方（导航上的那条路）</text>
+      <!-- 终点小旗 -->
+      <g stroke="#1c1a17" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="826" y1="118" x2="826" y2="62"/>
+        <path d="M826 62 L868 74 L826 88" fill="#d4441c" stroke="#d4441c"/>
+      </g>
+
+      <!-- 实际轨迹：两道胎痕，缓缓滑出路线 -->
+      <path d="M60 136 C 220 154, 370 201, 490 276 C 600 346, 700 431, 770 497"
+            stroke="#1c1a17" stroke-width="4" stroke-linecap="round"/>
+      <path d="M60 150 C 220 168, 370 215, 488 290 C 598 360, 696 445, 762 511"
+            stroke="#1c1a17" stroke-width="4" stroke-linecap="round" stroke-dasharray="22 10"/>
+
+      <!-- 绿灯检查点 -->
+      <g font-size="22" fill="#6b6357">
+        <g>
+          <circle cx="140" cy="150" r="25" fill="#faf7f2" stroke="#4e7d3f" stroke-width="4"/>
+          <path d="M129 151 L137 159 L152 141" stroke="#4e7d3f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="40" y="198">测试通过</text>
+        </g>
+        <g>
+          <circle cx="268" cy="177" r="25" fill="#faf7f2" stroke="#4e7d3f" stroke-width="4"/>
+          <path d="M257 178 L265 186 L280 168" stroke="#4e7d3f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="168" y="225">指标全绿</text>
+        </g>
+        <g>
+          <circle cx="390" cy="222" r="25" fill="#faf7f2" stroke="#4e7d3f" stroke-width="4"/>
+          <path d="M379 223 L387 231 L402 213" stroke="#4e7d3f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="290" y="270">构建成功</text>
+        </g>
+        <g>
+          <circle cx="505" cy="291" r="25" fill="#faf7f2" stroke="#4e7d3f" stroke-width="4"/>
+          <path d="M494 292 L502 300 L517 282" stroke="#4e7d3f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="405" y="339">代码能跑</text>
+        </g>
+        <g>
+          <circle cx="620" cy="368" r="25" fill="#faf7f2" stroke="#4e7d3f" stroke-width="4"/>
+          <path d="M609 369 L617 377 L632 359" stroke="#4e7d3f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="510" y="416">一切正常</text>
+        </g>
+      </g>
+
+      <!-- 自证标注：勾是它自己打的 -->
+      <path d="M340 420 C 360 350, 380 300, 396 258" stroke="#b08968" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9"/>
+      <path d="M396 258 L386 268 M396 258 L398 272" stroke="#b08968" stroke-width="3" stroke-linecap="round"/>
+      <text x="120" y="465" font-size="28" fill="#231709">这些勾，是它自己给自己打的——</text>
+      <text x="120" y="505" font-size="28" fill="#231709">所以它<tspan fill="#d4441c">测不出自己在偏</tspan>。</text>
+
+      <!-- 终点的车：还在开，仪表盘全绿 -->
+      <g transform="translate(764 512) rotate(38)" stroke="#1c1a17" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M-46 6 L-42 -6 Q-40 -12 -33 -12 L27 -12 Q34 -12 36 -6 L40 6 Q42 12 36 12 L-40 12 Q-48 12 -46 6 Z" fill="#faf7f2"/>
+        <path d="M-28 -12 L-24 -26 L12 -26 L18 -12"/>
+        <line x1="-5" y1="-26" x2="-5" y2="-12"/>
+        <circle cx="-26" cy="16" r="8" fill="#faf7f2"/>
+        <circle cx="24" cy="16" r="8" fill="#faf7f2"/>
+        <circle cx="44" cy="0" r="3" fill="#4e7d3f" stroke="none"/>
+      </g>
+      <text x="640" y="602" font-size="24" fill="#6b6357">还在开，仪表盘上全是绿灯</text>
+
+      <!-- 漂移落差 -->
+      <g stroke="#d4441c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="845" y1="132" x2="845" y2="500"/>
+        <path d="M837 144 L845 132 L853 144"/>
+        <path d="M837 488 L845 500 L853 488"/>
+      </g>
+      <text x="705" y="270" font-family="'Ma Shan Zheng',cursive" font-size="76" fill="#d4441c">漂移</text>
+      <path d="M790 285 C 815 305, 830 320, 841 340" stroke="#d4441c" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9"/>
+
+      <!-- 环外的人 -->
+      <g transform="translate(44 0)" stroke="#1c1a17" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="740" cy="42" r="13" fill="#faf7f2"/>
+        <line x1="740" y1="55" x2="740" y2="90"/>
+        <line x1="740" y1="66" x2="722" y2="80"/>
+        <line x1="740" y1="66" x2="760" y2="76"/>
+        <line x1="740" y1="90" x2="726" y2="112"/>
+        <line x1="740" y1="90" x2="754" y2="112"/>
+      </g>
+      <text x="378" y="56" font-size="26" fill="#231709">这段差距，只有<tspan fill="#d4441c">环外的人</tspan>看得见</text>
+
+      <!-- 思考气泡：人在环外要一直想 -->
+      <ellipse cx="722" cy="-28" rx="138" ry="34" fill="#faf7f2" stroke="#1c1a17" stroke-width="3.5"/>
+      <text x="722" y="-18" font-size="27" fill="#231709" text-anchor="middle">这真的是<tspan fill="#d4441c">我要的</tspan>吗？</text>
+      <circle cx="768" cy="10" r="5.5" fill="none" stroke="#1c1a17" stroke-width="3"/>
+      <circle cx="779" cy="23" r="3.5" fill="none" stroke="#1c1a17" stroke-width="3"/>
+    </svg>
+  </div>
+
+  <div class="takeaway">翻车自己会报错，漂移不会。<span class="hl">漂移的刹车，只在人手里。</span></div>
+
+  <div class="foot">
+    <div class="sig"><span class="bar"></span>Khan驾到</div>
+    <div class="entag">CRASH · DRIFT</div>
+  </div>
+
+</div>
+</body>
+</html>
