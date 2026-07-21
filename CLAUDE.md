@@ -74,6 +74,6 @@
 1. **先重新生成图片**：若本次会话改过某个话题的 `image.html`，先按工作流第 4 步重新导出该目录的 `image.png`（确保提交的是最新截图，而非过期版本）。
 2. **commit**：把所有改动（含刚生成的 `image.png`）一起提交。
 3. **立即 `git push`** 推送到 GitHub。
-4. **Teams 发送成品**（2026-07-21 新增）：推送完成后，用 `agent-teams` skill 把本次生成/修改话题的成品发给我（kejing.han@essexlg.com）：`text.txt` 的文案内容作为消息正文，`image.png` 作为附件图片一并发送，方便我直接从手机复制发朋友圈。
+4. **Teams 发送成品**（2026-07-21 新增）：推送完成后，用 `agent-teams` skill 把本次生成/修改话题的成品发给我（kejing.han@essexlg.com，即发到 Teams 的 self 笔记线程 `48:notes`）：`text.txt` 的文案内容作为消息正文；图片**发 GitHub 链接**（`https://github.com/colin-han/khan-arrives/blob/main/{目录}/image.png`）——`file upload` 对 self 线程不支持（返回 HTTP 503），别再试附件上传。
 
 本仓库直接在 `main` 分支上工作并推送，不必另开分支。
