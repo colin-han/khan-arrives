@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>不打烊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1440px;}
+  body{
+    background-color:#faf7f2;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#231709; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* 纸纹 */
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05; mix-blend-mode:multiply;
+  }
+  .page{position:relative; padding:80px 92px 60px; height:1440px; display:flex; flex-direction:column;}
+
+  /* 标题区 */
+  header{margin-bottom:26px;}
+  .title{
+    font-family:"Ma Shan Zheng",cursive;
+    font-size:120px; line-height:1.05; color:#1c1a17; letter-spacing:0.06em;
+  }
+  .subtitle{
+    font-family:"SF Mono",Menlo,monospace; font-size:30px; color:#d4441c;
+    margin-top:14px; letter-spacing:0.04em;
+  }
+  .lede{font-size:31px; line-height:1.6; color:#4a4238; margin-top:16px;}
+  .lede .hl{color:#d4441c;}
+
+  /* 主图 */
+  .chart{flex:1; display:flex; align-items:center;}
+  .chart svg{width:100%; height:auto; display:block;}
+
+  /* 结语 */
+  .takeaway{
+    font-size:33px; line-height:1.6; color:#231709;
+    margin-top:6px; padding-top:20px; border-top:2px dashed #d8cfc0;
+  }
+  .takeaway .hl{color:#d4441c;}
+
+  /* 署名（流式） */
+  .foot{margin-top:24px; display:flex; justify-content:space-between; align-items:center;}
+  .sig{display:flex; align-items:center; gap:14px; font-family:"Songti SC",serif; font-weight:700; font-size:26px;}
+  .sig .bar{width:26px;height:2px;background:#d4441c;display:inline-block;}
+  .sig .theme{font-family:"LXGW Bright","PingFang SC",sans-serif; font-weight:400; font-size:21px; color:#9a9286;}
+  .entag{font-size:20px; letter-spacing:0.32em; color:#9a9286;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="title">不打烊</div>
+    <div class="subtitle">bugfix loop · 24/7</div>
+    <div class="lede">TaskTrack 的理想流程：容易漂移的活 developer 盯着，确定性强的交给<span class="hl">不打烊</span>的 loop。</div>
+  </header>
+
+  <div class="chart">
+    <svg viewBox="0 0 900 830" fill="none">
+      <!-- ===== 左轨：我 · 写功能 ===== -->
+      <rect x="12" y="78" width="398" height="700" rx="20" fill="none" stroke="#b8b0a2" stroke-width="2.5"/>
+      <!-- 小人头像 -->
+      <g stroke="#d4441c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="52" cy="30" r="13" fill="none"/>
+        <path d="M30 62 Q 52 44 74 62"/>
+      </g>
+      <text x="92" y="52" font-size="32" fill="#1c1a17">developer · 写功能</text>
+
+      <!-- 1. 早上 inbox -->
+      <g stroke="#1c1a17" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="44" y="112" width="52" height="40" rx="6" fill="#faf7f2"/>
+        <path d="M44 118 L70 138 L96 118"/>
+      </g>
+      <text x="116" y="142" font-size="30" fill="#1c1a17">09:00　打开 inbox</text>
+      <text x="60" y="196" font-size="26" fill="#4a4238">・回答它拿不准的问题</text>
+      <text x="60" y="238" font-size="26" fill="#4a4238">・review 它修好的 bug，提交</text>
+
+      <!-- 向下小箭头 -->
+      <path d="M210 264 L210 290 M200 282 L210 292 L220 282" stroke="#d4441c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- 2. 专心写功能卡 -->
+      <text x="60" y="342" font-size="34" fill="#1c1a17">专心写新功能、做架构</text>
+      <text x="60" y="382" font-size="23" fill="#9a9286">不被 bug 打断</text>
+      <!-- 显示器+代码 -->
+      <g stroke="#1c1a17" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="150" y="404" width="120" height="82" rx="9" fill="#faf7f2"/>
+        <path d="M178 428 L164 445 L178 462"/>
+        <path d="M242 428 L256 445 L242 462"/>
+        <line x1="220" y1="424" x2="200" y2="466"/>
+        <line x1="196" y1="486" x2="224" y2="486"/>
+        <line x1="210" y1="486" x2="210" y2="500"/>
+        <line x1="182" y1="500" x2="238" y2="500"/>
+      </g>
+
+      <!-- 向下小箭头 -->
+      <path d="M210 522 L210 546 M200 538 L210 548 L220 538" stroke="#d4441c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- 3. 完成一张卡，喊一声 -->
+      <text x="60" y="590" font-size="24" fill="#4a4238">完成一张卡，冲它喊一声：</text>
+      <rect x="44" y="608" width="336" height="60" rx="30" fill="#faf7f2" stroke="#d4441c" stroke-width="3.5"/>
+      <text x="212" y="648" font-size="27" fill="#d4441c" text-anchor="middle">「帮我盯着 WEBBI-4481」</text>
+
+      <!-- 4. 再来一张，再喊一声 -->
+      <text x="60" y="726" font-size="24" fill="#4a4238">下一张写完，再喊一声</text>
+
+      <!-- ===== 右轨：Agent · 一直在转 ===== -->
+      <rect x="490" y="78" width="398" height="700" rx="20" fill="#f0ece4" stroke="#b8b0a2" stroke-width="2.5"/>
+      <!-- 机器人小头像 -->
+      <g stroke="#d4441c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="518" y="24" width="44" height="34" rx="9" fill="none"/>
+        <circle cx="532" cy="40" r="3" fill="#d4441c" stroke="none"/>
+        <circle cx="548" cy="40" r="3" fill="#d4441c" stroke="none"/>
+        <line x1="540" y1="24" x2="540" y2="14"/><circle cx="540" cy="11" r="3"/>
+      </g>
+      <text x="582" y="52" font-size="32" fill="#1c1a17">agent · 一直在转</text>
+
+      <!-- 上部：结果攒进 inbox -->
+      <g stroke="#1c1a17" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="522" y="112" width="52" height="40" rx="6" fill="#faf7f2"/>
+        <path d="M522 118 L548 138 L574 118"/>
+      </g>
+      <text x="594" y="142" font-size="30" fill="#1c1a17">结果攒进 inbox</text>
+      <text x="524" y="238" font-size="26" fill="#4a4238">・修好的 → 待 review</text>
+      <text x="524" y="280" font-size="26" fill="#4a4238">・拿不准的 → 留成问题</text>
+
+      <!-- 向上小箭头 -->
+      <path d="M689 342 L689 312 M679 322 L689 310 L699 322" stroke="#d4441c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- 中部：不停转的 loop -->
+      <g stroke="#1c1a17" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M769 500 a 80 80 0 1 1 -18 -52"/>
+        <path d="M743 434 L753 448 L737 452"/>
+        <path d="M611 512 L607 496 L623 498"/>
+      </g>
+      <text x="685" y="467" font-size="24" fill="#231709" text-anchor="middle">监听 JIRA</text>
+      <text x="685" y="504" font-size="24" fill="#231709" text-anchor="middle">发现新 bug</text>
+      <text x="685" y="541" font-size="24" fill="#231709" text-anchor="middle">自动修复</text>
+
+      <!-- 底部：白天黑夜都在 -->
+      <g stroke="#b08968" stroke-width="3" stroke-linecap="round">
+        <circle cx="545" cy="716" r="11" fill="none"/>
+        <line x1="545" y1="697" x2="545" y2="701"/><line x1="545" y1="731" x2="545" y2="735"/>
+        <line x1="526" y1="716" x2="530" y2="716"/><line x1="560" y1="716" x2="564" y2="716"/>
+        <line x1="532" y1="703" x2="535" y2="706"/><line x1="555" y1="726" x2="558" y2="729"/>
+        <line x1="558" y1="703" x2="555" y2="706"/><line x1="535" y1="726" x2="532" y2="729"/>
+      </g>
+      <path d="M836 702 A 16 16 0 1 0 851 728 A 13 13 0 0 1 836 702 Z" fill="none" stroke="#b08968" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="689" y="726" font-size="24" fill="#6b6357" text-anchor="middle">白天黑夜，都在转</text>
+
+      <!-- ===== 顶部交接：inbox → 每天早上的我 ===== -->
+      <path d="M516 96 C 470 88, 448 88, 416 96" stroke="#d4441c" stroke-width="4" stroke-linecap="round"/>
+      <path d="M428 88 L414 96 L426 105" stroke="#d4441c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="450" y="64" font-size="20" fill="#d4441c" text-anchor="middle">每天 9:00</text>
+
+      <!-- ===== 派活箭头：随时都可以（最后绘制，压在卡片之上） ===== -->
+      <path d="M384 638 C 470 648, 545 610, 600 548" stroke="#d4441c" stroke-width="4" stroke-linecap="round"/>
+      <path d="M590 542 L603 545 L598 559" stroke="#d4441c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M312 718 C 440 742, 560 700, 626 588" stroke="#d4441c" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="14 10"/>
+      <path d="M615 586 L628 584 L627 598" stroke="#d4441c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- 底部注脚 -->
+      <text x="12" y="822" font-size="23" fill="#9a9286">HITL：人在环内，一步步一起干</text>
+      <text x="888" y="822" font-size="23" fill="#9a9286" text-anchor="end">HOTL：人在环外，只看结果</text>
+    </svg>
+  </div>
+
+  <div class="takeaway">随时完成一张卡，随时派活；<span class="hl">早上看一眼结果就好</span>。</div>
+
+  <div class="foot">
+    <div class="sig"><span class="bar"></span>Khan驾到<span class="theme">怎样让人和 Agent 协作得更好？</span></div>
+    <div class="entag">ALWAYS · ON</div>
+  </div>
+
+</div>
+</body>
+</html>
