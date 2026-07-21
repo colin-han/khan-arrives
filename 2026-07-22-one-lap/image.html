@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>转一圈</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1440px;}
+  body{
+    background-color:#faf7f2;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#231709; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* 纸纹 */
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05; mix-blend-mode:multiply;
+  }
+  .page{position:relative; padding:80px 92px 60px; height:1440px; display:flex; flex-direction:column;}
+
+  /* 标题区 */
+  header{margin-bottom:10px;}
+  .title{
+    font-family:"Ma Shan Zheng",cursive;
+    font-size:110px; line-height:1.05; color:#1c1a17; letter-spacing:0.06em;
+  }
+  .subtitle{
+    font-family:"SF Mono",Menlo,monospace; font-size:28px; color:#d4441c;
+    margin-top:12px; letter-spacing:0.04em;
+  }
+  .lede{font-size:31px; line-height:1.6; color:#4a4238; margin-top:14px;}
+  .lede .hl{color:#d4441c;}
+
+  /* 主图 */
+  .chart{flex:1; display:flex; align-items:center;}
+  .chart svg{width:100%; height:auto; display:block;}
+
+  /* 结语 */
+  .takeaway{
+    font-size:32px; line-height:1.6; color:#231709;
+    margin-top:4px; padding-top:18px; border-top:2px dashed #d8cfc0;
+  }
+  .takeaway .hl{color:#d4441c;}
+
+  /* 署名（流式） */
+  .foot{margin-top:22px; display:flex; justify-content:space-between; align-items:center;}
+  .sig{display:flex; align-items:center; gap:14px; font-family:"Songti SC",serif; font-weight:700; font-size:26px;}
+  .sig .bar{width:26px;height:2px;background:#d4441c;display:inline-block;}
+  .sig .theme{font-family:"LXGW Bright","PingFang SC",sans-serif; font-weight:400; font-size:21px; color:#9a9286;}
+  .entag{font-size:20px; letter-spacing:0.32em; color:#9a9286;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="title">转一圈</div>
+    <div class="subtitle">one lap of the bugfix loop</div>
+    <div class="lede">上一期那个<span class="hl">不打烊</span>的 loop，每转一圈干的事。</div>
+  </header>
+
+  <div class="chart">
+    <svg viewBox="0 108 900 792" fill="none">
+      <!-- 昨天重构的部分：低调光晕（画在最底层） -->
+      <path d="M554 236 A256 256 0 0 1 618 663" stroke="#b08968" stroke-opacity="0.2" stroke-width="62" stroke-linecap="round"/>
+      <circle cx="378" cy="716" r="44" fill="#b08968" fill-opacity="0.18"/>
+      <circle cx="96" cy="874" r="9" fill="#b08968" fill-opacity="0.3"/>
+      <text x="114" y="881" font-size="20" fill="#9a9286">昨天重构的部分</text>
+
+      <!-- 主环 -->
+      <circle cx="450" cy="470" r="256" stroke="#1c1a17" stroke-width="3.5"/>
+      <!-- 顺时针方向箭头 ×3 -->
+      <g fill="#1c1a17" stroke="none">
+        <g transform="translate(522 224) rotate(16.4)"><path d="M-9 -7 L9 0 L-9 7 Z"/></g>
+        <g transform="translate(450 726) rotate(180)"><path d="M-9 -7 L9 0 L-9 7 Z"/></g>
+        <g transform="translate(197 434) rotate(-81.8)"><path d="M-9 -7 L9 0 L-9 7 Z"/></g>
+      </g>
+
+      <!-- 11 → 1 高亮弧：转完一圈接着下一张 -->
+      <path d="M326 246 A256 256 0 0 1 428 216" stroke="#d4441c" stroke-width="5" stroke-linecap="round"/>
+      <g fill="#d4441c" stroke="none">
+        <g transform="translate(432 215) rotate(-4)"><path d="M-10 -8 L10 0 L-10 8 Z"/></g>
+      </g>
+
+      <!-- 中心：机器人 + 一句话 -->
+      <g stroke="#d4441c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="428" y="396" width="44" height="34" rx="9" fill="none"/>
+        <circle cx="442" cy="412" r="3" fill="#d4441c" stroke="none"/>
+        <circle cx="458" cy="412" r="3" fill="#d4441c" stroke="none"/>
+        <line x1="450" y1="396" x2="450" y2="386"/><circle cx="450" cy="383" r="3"/>
+      </g>
+      <text x="450" y="478" font-size="25" fill="#d4441c" text-anchor="middle">转完一圈，</text>
+      <text x="450" y="512" font-size="25" fill="#d4441c" text-anchor="middle">接着下一张</text>
+
+      <!-- ===== 11 个站点 ===== -->
+      <!-- 1 发现新 bug 卡 -->
+      <circle cx="450" cy="214" r="26" fill="#faf7f2" stroke="#1c1a17" stroke-width="4"/>
+      <text x="450" y="223" font-size="24" fill="#1c1a17" text-anchor="middle">1</text>
+      <text x="450" y="164" font-size="24" fill="#231709" text-anchor="middle">发现新 bug 卡</text>
+
+      <!-- 2 收集上下文 -->
+      <circle cx="588" cy="255" r="26" fill="#faf7f2" stroke="#1c1a17" stroke-width="4"/>
+      <text x="588" y="264" font-size="24" fill="#1c1a17" text-anchor="middle">2</text>
+      <text x="622" y="220" font-size="24" fill="#231709">收集上下文</text>
+      <text x="640" y="250" font-size="19" fill="#9a9286">bug / story / epic</text>
+
+      <!-- 3 描述清楚吗？（卡点） -->
+      <circle cx="683" cy="364" r="26" fill="#faf7f2" stroke="#d4441c" stroke-width="4"/>
+      <text x="683" y="373" font-size="24" fill="#d4441c" text-anchor="middle">3</text>
+      <text x="683" y="322" font-size="24" fill="#231709" text-anchor="middle">描述清楚吗？</text>
+      <path d="M712 376 L764 398" stroke="#d4441c" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 7"/>
+      <text x="720" y="432" font-size="20" fill="#4a4238">不清楚？</text>
+      <text x="720" y="458" font-size="20" fill="#d4441c">comment 问 reporter</text>
+
+      <!-- 4 值得修吗？（卡点） -->
+      <circle cx="703" cy="506" r="26" fill="#faf7f2" stroke="#d4441c" stroke-width="4"/>
+      <text x="703" y="515" font-size="24" fill="#d4441c" text-anchor="middle">4</text>
+      <text x="748" y="514" font-size="24" fill="#231709">值得修吗？</text>
+      <path d="M718 528 L740 566" stroke="#d4441c" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 7"/>
+      <text x="726" y="596" font-size="20" fill="#4a4238">价值不定？</text>
+      <text x="726" y="622" font-size="20" fill="#d4441c">comment 问 BA</text>
+
+      <!-- 5 能重现吗？（卡点） -->
+      <circle cx="643" cy="638" r="26" fill="#faf7f2" stroke="#d4441c" stroke-width="4"/>
+      <text x="643" y="647" font-size="24" fill="#d4441c" text-anchor="middle">5</text>
+      <text x="678" y="668" font-size="24" fill="#231709">能重现吗？</text>
+      <path d="M660 662 L688 700" stroke="#d4441c" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 7"/>
+      <text x="656" y="730" font-size="20" fill="#4a4238">重现不了？</text>
+      <text x="656" y="756" font-size="20" fill="#d4441c">inbox 问 developer</text>
+
+      <!-- 6 根因分析 -->
+      <circle cx="522" cy="716" r="26" fill="#faf7f2" stroke="#1c1a17" stroke-width="4"/>
+      <text x="522" y="725" font-size="24" fill="#1c1a17" text-anchor="middle">6</text>
+      <text x="540" y="782" font-size="24" fill="#231709" text-anchor="middle">根因分析</text>
+
+      <!-- 7 评估修复风险（卡点） -->
+      <circle cx="378" cy="716" r="26" fill="#faf7f2" stroke="#d4441c" stroke-width="4"/>
+      <text x="378" y="725" font-size="24" fill="#d4441c" text-anchor="middle">7</text>
+      <text x="380" y="672" font-size="24" fill="#231709" text-anchor="middle">修复风险大吗？</text>
+      <path d="M362 744 L336 786" stroke="#d4441c" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 7"/>
+      <text x="330" y="818" font-size="20" fill="#4a4238" text-anchor="middle">怕改出问题？</text>
+      <text x="330" y="844" font-size="20" fill="#d4441c" text-anchor="middle">inbox 问 developer</text>
+
+      <!-- 8 修复 bug -->
+      <circle cx="257" cy="638" r="26" fill="#faf7f2" stroke="#1c1a17" stroke-width="4"/>
+      <text x="257" y="647" font-size="24" fill="#1c1a17" text-anchor="middle">8</text>
+      <text x="222" y="668" font-size="24" fill="#231709" text-anchor="end">修复 bug</text>
+
+      <!-- 9 验证修复 -->
+      <circle cx="197" cy="506" r="26" fill="#faf7f2" stroke="#1c1a17" stroke-width="4"/>
+      <text x="197" y="515" font-size="24" fill="#1c1a17" text-anchor="middle">9</text>
+      <text x="158" y="514" font-size="24" fill="#231709" text-anchor="end">验证修复</text>
+
+      <!-- 10 交 developer review（硬门） -->
+      <circle cx="217" cy="364" r="34" fill="none" stroke="#d4441c" stroke-width="3"/>
+      <circle cx="217" cy="364" r="26" fill="#d4441c" stroke="none"/>
+      <text x="217" y="373" font-size="24" fill="#faf7f2" text-anchor="middle">10</text>
+      <text x="172" y="316" font-size="24" fill="#231709" text-anchor="end">交 developer</text>
+      <text x="172" y="346" font-size="24" fill="#231709" text-anchor="end">review 结果</text>
+      <text x="172" y="378" font-size="20" fill="#d4441c" text-anchor="end">硬门：人不点头，</text>
+      <text x="172" y="404" font-size="20" fill="#d4441c" text-anchor="end">不放行</text>
+
+      <!-- 11 创建 MR 送评审 -->
+      <circle cx="312" cy="255" r="26" fill="#faf7f2" stroke="#1c1a17" stroke-width="4"/>
+      <text x="312" y="264" font-size="24" fill="#1c1a17" text-anchor="middle">11</text>
+      <text x="284" y="214" font-size="24" fill="#231709" text-anchor="end">创建 MR 送评审</text>
+    </svg>
+  </div>
+
+  <div class="takeaway">一圈 11 步；卡点问人，<span class="hl">第 10 步是硬门：人不点头，不放行</span>。</div>
+
+  <div class="foot">
+    <div class="sig"><span class="bar"></span>Khan驾到<span class="theme">怎样让人和 Agent 协作得更好？</span></div>
+    <div class="entag">ONE · LAP</div>
+  </div>
+
+</div>
+</body>
+</html>

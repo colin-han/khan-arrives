@@ -11,12 +11,36 @@
     font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
     color:#1a1a1a; min-height:100vh;
   }
-  .page { display:flex; flex-direction:column; align-items:center; padding:24px 12px; }
+  .layout { display:flex; gap:24px; align-items:flex-start; justify-content:center; padding:24px 12px; }
+  .main { display:flex; flex-direction:column; align-items:center; }
 
   .toolbar { margin-bottom:16px; display:flex; gap:8px; align-items:center; font-size:13px; color:#666; flex-wrap:wrap; justify-content:center; }
-  .toolbar select, .toolbar a.btn {
+  .toolbar a.btn {
     font:inherit; padding:6px 12px; border-radius:6px; border:1px solid #ccc;
     background:#fff; color:#576b95; text-decoration:none; cursor:pointer;
+  }
+
+  /* ===== 左侧话题菜单（按月分组） ===== */
+  .sidebar {
+    width:232px; background:#fff; border-radius:12px; padding:14px 0 10px;
+    box-shadow:0 4px 18px rgba(0,0,0,.12);
+    position:sticky; top:24px; max-height:calc(100vh - 48px); overflow-y:auto; flex-shrink:0;
+  }
+  .sidebar h2 { font-size:14px; color:#1a1a1a; padding:2px 18px 10px; border-bottom:1px solid #f0f0f0; }
+  .mtitle { padding:12px 18px 6px; font-size:12px; color:#999; letter-spacing:.05em; }
+  .mitem {
+    display:block; padding:9px 18px 9px 15px; font-size:13px; color:#333;
+    text-decoration:none; border-left:3px solid transparent; line-height:1.4;
+  }
+  .mitem:hover { background:#f7f7f7; }
+  .mitem.active { color:#576b95; font-weight:600; background:#f2f5fa; border-left-color:#576b95; }
+  .mitem .day { color:#b2b2b2; font-size:12px; margin-right:7px; font-variant-numeric:tabular-nums; }
+  .mitem.active .day { color:#8ba0c4; }
+  .sidebar .empty { padding:10px 18px; font-size:12px; color:#999; line-height:1.6; }
+
+  @media (max-width:720px){
+    .layout { flex-direction:column; align-items:center; }
+    .sidebar { position:static; width:360px; max-height:260px; }
   }
 
   /* ===== 手机框 9:20 ===== */
@@ -105,10 +129,14 @@
 </style>
 </head>
 <body>
-<div class="page">
+<div class="layout">
+  <nav class="sidebar">
+    <h2>话题</h2>
+    <div id="menu"><div class="empty">加载中…</div></div>
+  </nav>
+
+  <div class="main">
   <div class="toolbar">
-    <span>话题：</span>
-    <select id="topicSel"></select>
     <a class="btn" id="openSrc" href="#" target="_blank">打开原图 HTML</a>
   </div>
 
@@ -152,6 +180,7 @@
   </div>
 
   <div class="hint" id="hint"></div>
+  </div>
 </div>
 
 <div class="overlay" id="overlay">
@@ -160,30 +189,98 @@
 </div>
 
 <script>
-const TOPICS = ["2026-07-18-harness-learn","2026-07-17-human-on-the-loop"];
-const params = new URLSearchParams(location.search);
-let topic = params.get("topic") || TOPICS[0];
+// 兜底列表：仅当目录自动发现失败时使用（如非 python http.server 环境）
+const FALLBACK_TOPICS = ["2026-07-22-one-lap","2026-07-21-always-on","2026-07-20-drift","2026-07-18-harness-learn","2026-07-17-human-on-the-loop"];
 
-const sel = document.getElementById("topicSel");
-TOPICS.forEach(t=>{
-  const o=document.createElement("option"); o.value=t; o.textContent=t.replace(/^\d{4}-\d{2}-\d{2}-/,"");
-  if(t===topic) o.selected=true; sel.appendChild(o);
-});
-sel.addEventListener("change",()=>{ location.search="?topic="+encodeURIComponent(sel.value); });
-document.getElementById("openSrc").href = topic+"/image.html";
+// 从本地 server 的目录列表自动发现话题目录（YYYY-MM-DD-slug/）
+async function discoverTopics(){
+  try{
+    const r = await fetch("./");
+    if(!r.ok) throw 0;
+    const doc = new DOMParser().parseFromString(await r.text(), "text/html");
+    const dirs = [...doc.querySelectorAll("a")]
+      .map(a => decodeURIComponent(a.getAttribute("href") || ""))
+      .filter(h => /^\d{4}-\d{2}-\d{2}-[^/]+\/$/.test(h))
+      .map(h => h.slice(0, -1));
+    if(dirs.length) return dirs;
+  }catch(e){}
+  return FALLBACK_TOPICS;
+}
 
-const srcHtml = topic+"/image.html";
-const srcText = topic+"/text.txt";
-
-fetch(srcText).then(r=>{ if(!r.ok) throw 0; return r.text(); })
-  .then(t=>{ document.getElementById("text").textContent = t.trim(); })
-  .catch(()=>{
-    document.getElementById("text").textContent = "（文案加载失败）";
-    document.getElementById("hint").textContent =
-      "需通过本地 server 打开以加载文案与图片：http://localhost:8765/preview.html?topic="+topic;
+function buildMenu(topics, topic){
+  const menu = document.getElementById("menu");
+  menu.innerHTML = "";
+  const groups = {};
+  topics.forEach(t => {
+    const ym = t.slice(0, 7);
+    (groups[ym] = groups[ym] || []).push(t);
   });
+  Object.keys(groups).sort().reverse().forEach(ym => {
+    const title = document.createElement("div");
+    title.className = "mtitle";
+    title.textContent = ym.replace(/^(\d{4})-(\d{2})$/, (_, y, m) => `${y} 年 ${Number(m)} 月`);
+    menu.appendChild(title);
+    groups[ym].sort().reverse().forEach(t => {
+      const a = document.createElement("a");
+      a.className = "mitem" + (t === topic ? " active" : "");
+      a.href = "?topic=" + encodeURIComponent(t);
+      a.dataset.topic = t;
+      const day = document.createElement("span");
+      day.className = "day"; day.textContent = t.slice(8, 10) + "日";
+      a.appendChild(day);
+      a.appendChild(document.createTextNode(t.replace(/^\d{4}-\d{2}-\d{2}-/, "")));
+      a.addEventListener("click", e => {
+        if(e.metaKey || e.ctrlKey || e.shiftKey) return; // 新标签页打开等行为不拦截
+        e.preventDefault();
+        loadTopic(t, true);
+      });
+      menu.appendChild(a);
+    });
+  });
+}
 
-document.getElementById("thumbFrame").src = srcHtml;
+const params = new URLSearchParams(location.search);
+let topic = params.get("topic");
+let srcHtml, srcText;
+
+// 局部刷新：原地更新菜单高亮、文案、缩略图，不整页跳转
+function loadTopic(t, push){
+  topic = t;
+  srcHtml = t + "/image.html";
+  srcText = t + "/text.txt";
+
+  document.querySelectorAll(".mitem").forEach(a =>
+    a.classList.toggle("active", a.dataset.topic === t));
+  document.getElementById("openSrc").href = srcHtml;
+
+  fetch(srcText).then(r => { if(!r.ok) throw 0; return r.text(); })
+    .then(txt => { document.getElementById("text").textContent = txt.trim(); })
+    .catch(() => {
+      document.getElementById("text").textContent = "（文案加载失败）";
+      document.getElementById("hint").textContent =
+        "需通过本地 server 打开以加载文案与图片：http://localhost:8765/preview.html?topic=" + t;
+    });
+
+  // 用 location.replace 换 iframe 内容，避免产生浏览器历史条目（否则「后退」会先回退 iframe）
+  document.getElementById("thumbFrame").contentWindow.location.replace(srcHtml);
+
+  if(push) history.pushState({topic: t}, "", "?topic=" + encodeURIComponent(t));
+}
+
+let allTopics = [];
+discoverTopics().then(topics => {
+  topics.sort().reverse();
+  allTopics = topics;
+  if(!topic || !topics.includes(topic)) topic = topics[0];
+  buildMenu(topics, topic);
+  loadTopic(topic, false);
+});
+
+// 前进/后退也走局部刷新
+addEventListener("popstate", () => {
+  const t = new URLSearchParams(location.search).get("topic");
+  if(allTopics.length) loadTopic(allTopics.includes(t) ? t : allTopics[0], false);
+});
 
 const overlay=document.getElementById("overlay");
 const fullFrame=document.getElementById("fullFrame");
@@ -194,10 +291,10 @@ function sizeFull(){
   fullWrap.style.transform="scale("+s+")";
 }
 document.getElementById("thumb").addEventListener("click",()=>{
-  fullFrame.src=srcHtml; sizeFull(); overlay.classList.add("show");
+  fullFrame.contentWindow.location.replace(srcHtml); sizeFull(); overlay.classList.add("show");
 });
 overlay.addEventListener("click",()=>{
-  overlay.classList.remove("show"); fullFrame.src="about:blank";
+  overlay.classList.remove("show"); fullFrame.contentWindow.location.replace("about:blank");
 });
 addEventListener("resize",()=>{ if(overlay.classList.contains("show")) sizeFull(); });
 </script>
