@@ -190,7 +190,7 @@
 
 <script>
 // 兜底列表：仅当目录自动发现失败时使用（如非 python http.server 环境）
-const FALLBACK_TOPICS = ["2026-07-22-one-lap","2026-07-21-always-on","2026-07-20-drift","2026-07-18-harness-learn","2026-07-17-human-on-the-loop"];
+const FALLBACK_TOPICS = ["2026-07-23-ticket-rack","2026-07-22-one-lap","2026-07-21-always-on","2026-07-20-drift","2026-07-18-harness-learn","2026-07-17-human-on-the-loop"];
 
 // 从本地 server 的目录列表自动发现话题目录（YYYY-MM-DD-slug/）
 async function discoverTopics(){
@@ -243,6 +243,19 @@ const params = new URLSearchParams(location.search);
 let topic = params.get("topic");
 let srcHtml, srcText;
 
+// 图片画布尺寸（默认竖版 1080×1440；横版 image.html 写有 width:1440px）
+let IMG_W = 1080, IMG_H = 1440;
+function applyImgSize(){
+  const thumb = document.getElementById("thumb");
+  const tf = document.getElementById("thumbFrame");
+  const ff = document.getElementById("fullFrame");
+  const landscape = IMG_W > IMG_H;
+  const tw = landscape ? 192 : 144, th = landscape ? 144 : 192;
+  thumb.style.width = tw + "px"; thumb.style.height = th + "px";
+  [tf, ff].forEach(f => { f.style.width = IMG_W + "px"; f.style.height = IMG_H + "px"; });
+  tf.style.transform = "scale(" + (tw / IMG_W) + ")";
+}
+
 // 局部刷新：原地更新菜单高亮、文案、缩略图，不整页跳转
 function loadTopic(t, push){
   topic = t;
@@ -252,6 +265,13 @@ function loadTopic(t, push){
   document.querySelectorAll(".mitem").forEach(a =>
     a.classList.toggle("active", a.dataset.topic === t));
   document.getElementById("openSrc").href = srcHtml;
+
+  fetch(srcHtml).then(r => { if(!r.ok) throw 0; return r.text(); })
+    .then(src => {
+      const m = src.match(/html,body\{width:(\d+)px;height:(\d+)px/);
+      IMG_W = m ? Number(m[1]) : 1080; IMG_H = m ? Number(m[2]) : 1440;
+      applyImgSize();
+    }).catch(()=>{ IMG_W = 1080; IMG_H = 1440; applyImgSize(); });
 
   fetch(srcText).then(r => { if(!r.ok) throw 0; return r.text(); })
     .then(txt => { document.getElementById("text").textContent = txt.trim(); })
@@ -287,7 +307,7 @@ const fullFrame=document.getElementById("fullFrame");
 const fullWrap=document.querySelector(".overlay .frame");
 function sizeFull(){
   const pad=48;
-  const s=Math.min((innerWidth-pad)/1080,(innerHeight-pad)/1440);
+  const s=Math.min((innerWidth-pad)/IMG_W,(innerHeight-pad)/IMG_H);
   fullWrap.style.transform="scale("+s+")";
 }
 document.getElementById("thumb").addEventListener("click",()=>{

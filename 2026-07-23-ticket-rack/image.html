@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>取餐口</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1440px;height:1080px;}
+  body{
+    background-color:#faf7f2;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#231709; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05; mix-blend-mode:multiply;
+  }
+  .page{position:relative; padding:56px 80px 44px; height:1080px; display:flex; flex-direction:column;}
+
+  /* 标题区：横排 */
+  header{display:flex; align-items:flex-end; gap:44px; margin-bottom:8px;}
+  .title{
+    font-family:"Ma Shan Zheng",cursive;
+    font-size:92px; line-height:1; color:#1c1a17; letter-spacing:0.06em; flex-shrink:0;
+  }
+  .hgroup{padding-bottom:8px;}
+  .subtitle{
+    font-family:"SF Mono",Menlo,monospace; font-size:24px; color:#d4441c;
+    letter-spacing:0.04em;
+  }
+  .lede{font-size:28px; line-height:1.5; color:#4a4238; margin-top:8px;}
+  .lede .hl{color:#d4441c;}
+
+  .chart{flex:1; min-height:0; display:flex; justify-content:center;}
+  .chart svg{height:100%; width:auto; max-width:100%; display:block;}
+
+  .footline{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-top:6px; padding-top:14px; border-top:2px dashed #d8cfc0;
+  }
+  .takeaway{font-size:29px; line-height:1.5; color:#231709;}
+  .takeaway .hl{color:#d4441c;}
+  .sig{display:flex; align-items:center; gap:12px; font-family:"Songti SC",serif; font-weight:700; font-size:24px; flex-shrink:0;}
+  .sig .bar{width:24px;height:2px;background:#d4441c;display:inline-block;}
+  .sig .theme{font-family:"LXGW Bright","PingFang SC",sans-serif; font-weight:400; font-size:19px; color:#9a9286;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="title">取餐口</div>
+    <div class="hgroup">
+      <div class="subtitle">producers · queue · consumer</div>
+      <div class="lede">继续重构 loop：下单的和干活的<span class="hl">互不认识</span>，中间只隔一个取餐架。</div>
+    </div>
+  </header>
+
+  <div class="chart">
+    <svg viewBox="0 0 1280 800" fill="none">
+      <!-- ===== 生产者（左列三张卡） ===== -->
+      <g stroke="#1c1a17" stroke-width="3" stroke-linejoin="round">
+        <rect x="10" y="150" width="300" height="102" rx="14" fill="#faf7f2"/>
+        <rect x="10" y="292" width="300" height="102" rx="14" fill="#faf7f2"/>
+        <rect x="10" y="434" width="300" height="102" rx="14" fill="#faf7f2"/>
+      </g>
+      <g stroke="#d4441c" stroke-width="3" stroke-linecap="round">
+        <circle cx="46" cy="196" r="16" fill="none"/>
+        <path d="M46 187 L46 197 L53 201"/>
+        <path d="M34 183 L30 178 M58 183 L62 178"/>
+      </g>
+      <text x="76" y="192" font-size="25" fill="#1c1a17">心跳 cron</text>
+      <text x="28" y="234" font-size="19" fill="#8a8074">发现新课题，一次挂多张单</text>
+      <g stroke="#d4441c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="30" y="324" width="32" height="24" rx="4" fill="none"/>
+        <path d="M30 328 L46 340 L62 328"/>
+      </g>
+      <text x="76" y="334" font-size="25" fill="#1c1a17">inbox 答题</text>
+      <text x="28" y="376" font-size="19" fill="#8a8074">人答完题，挂续跑单</text>
+      <g stroke="#d4441c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="38" y1="452" x2="38" y2="490"/>
+        <path d="M38 454 L66 461 L38 470" fill="#d4441c" stroke="none"/>
+      </g>
+      <text x="76" y="476" font-size="25" fill="#1c1a17">CI 守望者</text>
+      <text x="28" y="518" font-size="19" fill="#8a8074">pipeline 出结果，挂回报单</text>
+
+      <!-- 入队箭头 ×3 -->
+      <g stroke="#d4441c" stroke-width="3.5" stroke-linecap="round" fill="none">
+        <path d="M316 196 C 344 194, 358 186, 374 180"/>
+        <path d="M316 340 C 354 336, 362 262, 376 214"/>
+        <path d="M316 484 C 358 480, 368 334, 378 246"/>
+      </g>
+      <g fill="#d4441c" stroke="none">
+        <g transform="translate(378 179) rotate(-14)"><path d="M-9 -6 L8 0 L-9 6 Z"/></g>
+        <g transform="translate(378 210) rotate(-68)"><path d="M-9 -6 L8 0 L-9 6 Z"/></g>
+        <g transform="translate(379 240) rotate(-80)"><path d="M-9 -6 L8 0 L-9 6 Z"/></g>
+      </g>
+
+      <!-- ===== 取餐架（中间） ===== -->
+      <text x="506" y="120" font-size="19" fill="#8a8074" text-anchor="middle" font-family="SF Mono,Menlo,monospace">~/.edt-triage/tasks</text>
+      <rect x="392" y="140" width="228" height="330" rx="14" fill="#f0ece4" stroke="#1c1a17" stroke-width="3.5"/>
+      <line x1="392" y1="250" x2="620" y2="250" stroke="#1c1a17" stroke-width="3"/>
+      <line x1="392" y1="360" x2="620" y2="360" stroke="#1c1a17" stroke-width="3"/>
+      <text x="606" y="172" font-size="20" fill="#8a8074" text-anchor="end" font-family="SF Mono,Menlo,monospace">pending/</text>
+      <g stroke="#1c1a17" stroke-width="2.5" fill="#faf7f2">
+        <rect x="410" y="186" width="30" height="44" rx="3" transform="rotate(-6 425 208)"/>
+        <rect x="452" y="184" width="30" height="44" rx="3" transform="rotate(4 467 206)"/>
+        <rect x="494" y="187" width="30" height="44" rx="3" transform="rotate(-3 509 209)"/>
+        <rect x="536" y="185" width="30" height="44" rx="3" transform="rotate(5 551 207)"/>
+      </g>
+      <text x="606" y="282" font-size="20" fill="#8a8074" text-anchor="end" font-family="SF Mono,Menlo,monospace">processing/</text>
+      <rect x="416" y="294" width="30" height="44" rx="3" transform="rotate(3 431 316)" stroke="#d4441c" stroke-width="3" fill="#faf7f2"/>
+      <text x="606" y="392" font-size="20" fill="#8a8074" text-anchor="end" font-family="SF Mono,Menlo,monospace">done/</text>
+      <g stroke="#1c1a17" stroke-width="2.5" fill="#faf7f2">
+        <rect x="412" y="404" width="30" height="44" rx="3" transform="rotate(-4 427 426)"/>
+        <rect x="454" y="406" width="30" height="44" rx="3" transform="rotate(6 469 428)"/>
+      </g>
+      <path d="M420 428 L426 434 L438 418" stroke="#4e7d3f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M463 430 L469 436 L481 420" stroke="#4e7d3f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="506" y="500" font-size="20" fill="#9a9286" text-anchor="middle">其实就是三个文件夹</text>
+
+      <!-- 解耦说明（左下） -->
+      <text x="200" y="622" font-size="24" fill="#4a4238" text-anchor="middle">两边互不认识，只认这个架子</text>
+      <text x="200" y="658" font-size="24" fill="#d4441c" text-anchor="middle">谁来都能挂，谁闲都能拿</text>
+
+      <!-- ===== 档案文件夹 dossiers/ ===== -->
+      <text x="506" y="548" font-size="19" fill="#8a8074" text-anchor="middle" font-family="SF Mono,Menlo,monospace">~/.edt-triage/dossiers/</text>
+      <rect x="392" y="562" width="228" height="172" rx="14" fill="#f0ece4" stroke="#1c1a17" stroke-width="3.5"/>
+      <g stroke="#1c1a17" stroke-width="2.5" fill="#faf7f2">
+        <rect x="412" y="590" width="34" height="46" rx="3" transform="rotate(-14 429 613)"/>
+        <rect x="446" y="604" width="34" height="46" rx="3" transform="rotate(11 463 627)"/>
+        <rect x="492" y="586" width="34" height="46" rx="3" transform="rotate(-4 509 609)"/>
+        <rect x="534" y="608" width="34" height="46" rx="3" transform="rotate(17 551 631)"/>
+        <rect x="428" y="654" width="34" height="46" rx="3" transform="rotate(7 445 677)"/>
+        <rect x="500" y="656" width="34" height="46" rx="3" transform="rotate(-10 517 679)"/>
+        <rect x="556" y="648" width="34" height="46" rx="3" transform="rotate(4 573 671)"/>
+      </g>
+      <text x="506" y="766" font-size="19" fill="#9a9286" text-anchor="middle">每个课题一份档案，两头都会更新</text>
+
+      <!-- 更新箭头：inbox 答题 → dossiers -->
+      <path d="M296 400 C 326 480, 352 546, 386 596" stroke="#d4441c" stroke-width="3" stroke-linecap="round" stroke-dasharray="10 8" fill="none"/>
+      <g fill="#d4441c" stroke="none"><g transform="translate(388 599) rotate(56)"><path d="M-8 -6 L8 0 L-8 6 Z"/></g></g>
+
+      <!-- 更新箭头：消费者循环 → dossiers -->
+      <path d="M884 568 C 806 654, 716 668, 634 654" stroke="#d4441c" stroke-width="3" stroke-linecap="round" stroke-dasharray="10 8" fill="none"/>
+      <g fill="#d4441c" stroke="none"><g transform="translate(630 653) rotate(189)"><path d="M-8 -6 L8 0 L-8 6 Z"/></g></g>
+
+      <!-- ===== 消费者循环（右，融为一体） ===== -->
+      <circle cx="985" cy="400" r="195" stroke="#1c1a17" stroke-width="3.5"/>
+      <!-- 顺时针箭头 ×2 -->
+      <g fill="#1c1a17" stroke="none">
+        <g transform="translate(1180 400) rotate(90)"><path d="M-9 -7 L9 0 L-9 7 Z"/></g>
+        <g transform="translate(848 538) rotate(225)"><path d="M-9 -7 L9 0 L-9 7 Z"/></g>
+      </g>
+
+      <!-- 中心：戴厨师帽的消费者 -->
+      <g stroke="#1c1a17" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M957 356 Q 945 336 963 332 Q 967 318 985 320 Q 1003 318 1007 332 Q 1025 336 1013 356 Z" fill="#faf7f2"/>
+        <line x1="961" y1="364" x2="1009" y2="364"/>
+        <rect x="955" y="372" width="60" height="46" rx="10" fill="#faf7f2"/>
+        <circle cx="973" cy="394" r="4" fill="#1c1a17"/>
+        <circle cx="997" cy="394" r="4" fill="#1c1a17"/>
+      </g>
+      <text x="985" y="452" font-size="24" fill="#1c1a17" text-anchor="middle">消费者</text>
+      <text x="985" y="482" font-size="19" fill="#8a8074" text-anchor="middle">接一张，做一张</text>
+
+      <!-- 节点：① 自收养 150° -->
+      <circle cx="816" cy="498" r="20" fill="#faf7f2" stroke="#1c1a17" stroke-width="3.5"/>
+      <text x="816" y="505" font-size="20" fill="#1c1a17" text-anchor="middle">1</text>
+      <text x="800" y="548" font-size="23" fill="#231709" text-anchor="middle">自收养</text>
+      <text x="800" y="576" font-size="18" fill="#8a8074" text-anchor="middle">先续上次干到一半的</text>
+
+      <!-- 节点：② 认领 210°（从架子取单） -->
+      <circle cx="816" cy="302" r="20" fill="#faf7f2" stroke="#1c1a17" stroke-width="3.5"/>
+      <text x="816" y="309" font-size="20" fill="#1c1a17" text-anchor="middle">2</text>
+      <text x="748" y="346" font-size="23" fill="#231709" text-anchor="middle">认领</text>
+      <text x="720" y="376" font-size="18" fill="#8a8074" text-anchor="middle">拿最早一张，</text>
+      <text x="716" y="402" font-size="18" fill="#8a8074" text-anchor="middle">抢不到换下一张</text>
+      <!-- 取单箭头：pending → ② -->
+      <path d="M626 212 C 712 218, 764 246, 800 280" stroke="#d4441c" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <g fill="#d4441c" stroke="none"><g transform="translate(803 283) rotate(42)"><path d="M-9 -6 L8 0 L-9 6 Z"/></g></g>
+
+      <!-- 节点：③ 占用检查 270° -->
+      <circle cx="985" cy="205" r="20" fill="#faf7f2" stroke="#1c1a17" stroke-width="3.5"/>
+      <text x="985" y="212" font-size="20" fill="#1c1a17" text-anchor="middle">3</text>
+      <text x="985" y="158" font-size="23" fill="#231709" text-anchor="middle">占用检查</text>
+      <text x="985" y="130" font-size="18" fill="#8a8074" text-anchor="middle">课题有人在弄？放回去换一张</text>
+
+      <!-- 节点：④ 按类型处理 330° -->
+      <circle cx="1154" cy="302" r="20" fill="#faf7f2" stroke="#1c1a17" stroke-width="3.5"/>
+      <text x="1154" y="309" font-size="20" fill="#1c1a17" text-anchor="middle">4</text>
+      <text x="1180" y="240" font-size="23" fill="#231709" text-anchor="middle">按类型处理</text>
+      <text x="1156" y="200" font-size="18" fill="#8a8074" text-anchor="middle">收卡 / 续跑 / CI 回报</text>
+
+      <!-- 节点：⑤ 收尾 30° -->
+      <circle cx="1154" cy="498" r="20" fill="#faf7f2" stroke="#1c1a17" stroke-width="3.5"/>
+      <text x="1154" y="505" font-size="20" fill="#1c1a17" text-anchor="middle">5</text>
+      <text x="1168" y="548" font-size="23" fill="#231709" text-anchor="middle">收尾</text>
+      <text x="1176" y="578" font-size="18" fill="#8a8074" text-anchor="middle">单子挪进 done</text>
+      <text x="1176" y="604" font-size="18" fill="#8a8074" text-anchor="middle">记下结果</text>
+
+      <!-- 节点：⑥ 排空 90° -->
+      <circle cx="985" cy="595" r="20" fill="#faf7f2" stroke="#d4441c" stroke-width="3.5"/>
+      <text x="985" y="602" font-size="20" fill="#d4441c" text-anchor="middle">6</text>
+      <text x="985" y="646" font-size="23" fill="#d4441c" text-anchor="middle">排空：回到 ②</text>
+      <text x="985" y="674" font-size="18" fill="#d4441c" text-anchor="middle">直到 pending 空了才歇</text>
+    </svg>
+  </div>
+
+  <div class="footline">
+    <div class="takeaway">一次心跳挂 5 张单，背靠背吃完；<span class="hl">不再每张干等 10 分钟</span>。</div>
+    <div class="sig"><span class="bar"></span>Khan驾到<span class="theme">怎样让人和 Agent 协作得更好？</span></div>
+  </div>
+
+</div>
+</body>
+</html>
