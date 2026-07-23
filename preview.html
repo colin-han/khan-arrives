@@ -34,8 +34,9 @@
   }
   .mitem:hover { background:#f7f7f7; }
   .mitem.active { color:#576b95; font-weight:600; background:#f2f5fa; border-left-color:#576b95; }
-  .mitem .day { color:#b2b2b2; font-size:12px; margin-right:7px; font-variant-numeric:tabular-nums; }
-  .mitem .day.vdash { display:inline-block; width:0; height:14px; border-left:1.5px dashed #c4c4c4; margin-right:14px; vertical-align:middle; }
+  .mitem .day { display:inline-block; width:30px; color:#b2b2b2; font-size:12px; margin-right:7px; font-variant-numeric:tabular-nums; }
+  .mitem .day.vdash { height:14px; position:relative; vertical-align:middle; }
+  .mitem .day.vdash::before { content:""; position:absolute; left:40%; top:0; width:0; height:14px; border-left:1.5px dashed #c4c4c4; }
   .mitem.active .day { color:#8ba0c4; }
   .sidebar .empty { padding:10px 18px; font-size:12px; color:#999; line-height:1.6; }
 
