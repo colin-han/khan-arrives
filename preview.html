@@ -76,15 +76,17 @@
   .name { color:#576b95; font-size:14px; font-weight:600; }
   .text { color:#1a1a1a; font-size:14px; line-height:1.46; margin-top:3px; white-space:pre-wrap; word-break:break-word; }
 
-  /* 配图单图（缩小） */
-  .thumb {
-    margin-top:7px; width:144px; height:192px; overflow:hidden;
-    border-radius:4px; position:relative; cursor:zoom-in; background:#faf7f2;
-  }
-  .thumb iframe {
-    width:1080px; height:1440px; border:0;
-    transform:scale(0.1333); transform-origin:top left; pointer-events:none;
-  }
+  /* 配图（1~9 张，朋友圈九宫格） */
+  .thumbs{margin-top:7px; display:grid; gap:6px;}
+  .thumbs.g1{display:block;}
+  .thumbs.g2{grid-template-columns:repeat(2,124px);}
+  .thumbs.g3{grid-template-columns:repeat(3,84px);}
+  .thumbs.g4{grid-template-columns:repeat(2,124px);}
+  .thumbs.g9{grid-template-columns:repeat(3,84px);}
+  .thumb{overflow:hidden; position:relative; cursor:zoom-in; background:#faf7f2; border-radius:4px;}
+  .thumbs.g1 .thumb{width:144px; height:192px;}
+  .thumb:not(.single){aspect-ratio:1/1; width:100%;}
+  .thumb iframe{position:absolute; border:0; pointer-events:none;}
 
   /* 操作栏（时间 + 赞/评论按钮） */
   .momentfoot { display:flex; justify-content:space-between; align-items:center; margin-top:8px; padding:0 0 12px; }
@@ -150,9 +152,7 @@
         <div class="content">
           <div class="name">Khan驾到</div>
           <div class="text" id="text">加载中…</div>
-          <div class="thumb" id="thumb" title="点击全屏查看">
-            <iframe id="thumbFrame" src="about:blank"></iframe>
-          </div>
+          <div class="thumbs" id="thumbs"></div>
           <div class="momentfoot">
             <div class="time" id="time">1 分钟前</div>
             <div class="actbtn">
@@ -190,7 +190,7 @@
 
 <script>
 // 兜底列表：仅当目录自动发现失败时使用（如非 python http.server 环境）
-const FALLBACK_TOPICS = ["2026-07-23-ticket-rack","2026-07-22-one-lap","2026-07-21-always-on","2026-07-20-drift","2026-07-18-harness-learn","2026-07-17-human-on-the-loop"];
+const FALLBACK_TOPICS = ["2026-07-23-writing-agent-team","2026-07-23-ticket-rack","2026-07-22-one-lap","2026-07-21-always-on","2026-07-20-drift","2026-07-18-harness-learn","2026-07-17-human-on-the-loop"];
 
 // 从本地 server 的目录列表自动发现话题目录（YYYY-MM-DD-slug/）
 async function discoverTopics(){
@@ -240,40 +240,86 @@ function buildMenu(topics, topic){
 }
 
 const params = new URLSearchParams(location.search);
+const BUST = "v=" + Date.now();
 let topic = params.get("topic");
 let srcHtml, srcText;
 
 // 图片画布尺寸（默认竖版 1080×1440；横版 image.html 写有 width:1440px）
 let IMG_W = 1080, IMG_H = 1440;
-function applyImgSize(){
-  const thumb = document.getElementById("thumb");
-  const tf = document.getElementById("thumbFrame");
-  const ff = document.getElementById("fullFrame");
-  const landscape = IMG_W > IMG_H;
-  const tw = landscape ? 192 : 144, th = landscape ? 144 : 192;
-  thumb.style.width = tw + "px"; thumb.style.height = th + "px";
-  [tf, ff].forEach(f => { f.style.width = IMG_W + "px"; f.style.height = IMG_H + "px"; });
-  tf.style.transform = "scale(" + (tw / IMG_W) + ")";
+
+// 探测话题目录里的 image.html / image2.html ... image9.html
+async function detectImages(t){
+  const names = ["image.html"];
+  for(let i=2;i<=9;i++) names.push("image"+i+".html");
+  const got = await Promise.all(names.map(async n => {
+    try{ const r = await fetch(t+"/"+n+"?"+BUST, {method:"HEAD"}); return r.ok ? n : null; }catch(e){ return null; }
+  }));
+  return got.filter(Boolean);
+}
+
+async function readImgSize(t, n){
+  try{
+    const r = await fetch(t+"/"+n+"?"+BUST); if(!r.ok) throw 0;
+    const m = (await r.text()).match(/html,body\{width:(\d+)px;height:(\d+)px/);
+    return m ? {w:Number(m[1]), h:Number(m[2])} : {w:1080, h:1440};
+  }catch(e){ return {w:1080, h:1440}; }
+}
+
+function layoutClass(n){
+  if(n===1) return "g1"; if(n===2) return "g2";
+  if(n===3) return "g3"; if(n===4) return "g4"; return "g9";
+}
+
+function sizeThumbs(single){
+  document.querySelectorAll("#thumbs .thumb").forEach(cell => {
+    const fr = cell.querySelector("iframe");
+    fr.style.width = IMG_W+"px"; fr.style.height = IMG_H+"px";
+    if(single){
+      const landscape = IMG_W > IMG_H;
+      const tw = landscape ? 192 : 144, th = landscape ? 144 : 192;
+      cell.style.width = tw+"px"; cell.style.height = th+"px";
+      fr.style.left="0"; fr.style.top="0";
+      fr.style.transformOrigin="top left";
+      fr.style.transform = "scale(" + (tw/IMG_W) + ")";
+    }else{
+      const cw = cell.clientWidth, ch = cell.clientHeight;
+      fr.style.left="50%"; fr.style.top="50%";
+      fr.style.transformOrigin="center center";
+      const s = Math.max(cw/IMG_W, ch/IMG_H);
+      fr.style.transform = "translate(-50%,-50%) scale(" + s + ")";
+    }
+  });
+}
+
+function buildThumbs(t, images, size){
+  IMG_W = size.w; IMG_H = size.h;
+  const single = images.length === 1;
+  const box = document.getElementById("thumbs");
+  box.innerHTML = "";
+  box.className = "thumbs " + layoutClass(images.length);
+  images.forEach((n, idx) => {
+    const cell = document.createElement("div");
+    cell.className = "thumb" + (single ? " single" : "");
+    cell.title = "点击全屏查看";
+    const fr = document.createElement("iframe");
+    fr.src = t + "/" + n + "?" + BUST;
+    cell.appendChild(fr);
+    cell.addEventListener("click", () => openFull(t + "/" + n + "?" + BUST, idx + 1));
+    box.appendChild(cell);
+  });
+  requestAnimationFrame(() => sizeThumbs(single));
 }
 
 // 局部刷新：原地更新菜单高亮、文案、缩略图，不整页跳转
-function loadTopic(t, push){
+async function loadTopic(t, push){
   topic = t;
-  srcHtml = t + "/image.html";
   srcText = t + "/text.txt";
 
   document.querySelectorAll(".mitem").forEach(a =>
     a.classList.toggle("active", a.dataset.topic === t));
-  document.getElementById("openSrc").href = srcHtml;
+  document.getElementById("openSrc").href = t + "/image.html";
 
-  fetch(srcHtml).then(r => { if(!r.ok) throw 0; return r.text(); })
-    .then(src => {
-      const m = src.match(/html,body\{width:(\d+)px;height:(\d+)px/);
-      IMG_W = m ? Number(m[1]) : 1080; IMG_H = m ? Number(m[2]) : 1440;
-      applyImgSize();
-    }).catch(()=>{ IMG_W = 1080; IMG_H = 1440; applyImgSize(); });
-
-  fetch(srcText).then(r => { if(!r.ok) throw 0; return r.text(); })
+  fetch(srcText+"?"+BUST).then(r => { if(!r.ok) throw 0; return r.text(); })
     .then(txt => { document.getElementById("text").textContent = txt.trim(); })
     .catch(() => {
       document.getElementById("text").textContent = "（文案加载失败）";
@@ -281,8 +327,15 @@ function loadTopic(t, push){
         "需通过本地 server 打开以加载文案与图片：http://localhost:8765/preview.html?topic=" + t;
     });
 
-  // 用 location.replace 换 iframe 内容，避免产生浏览器历史条目（否则「后退」会先回退 iframe）
-  document.getElementById("thumbFrame").contentWindow.location.replace(srcHtml);
+  const imgs = await detectImages(t);
+  if(!imgs.length) imgs.push("image.html");
+  const size = await readImgSize(t, imgs[0]);
+  buildThumbs(t, imgs, size);
+
+  // 自动展开（URL image 参数）：刷新后保持在展开状态
+  const imgIdx = Number(new URLSearchParams(location.search).get("image"));
+  if(imgIdx >= 1 && imgIdx <= imgs.length)
+    openFull(t + "/" + imgs[imgIdx-1] + "?" + BUST, imgIdx);
 
   if(push) history.pushState({topic: t}, "", "?topic=" + encodeURIComponent(t));
 }
@@ -308,13 +361,21 @@ const fullWrap=document.querySelector(".overlay .frame");
 function sizeFull(){
   const pad=48;
   const s=Math.min((innerWidth-pad)/IMG_W,(innerHeight-pad)/IMG_H);
+  fullFrame.style.width=IMG_W+"px"; fullFrame.style.height=IMG_H+"px";
   fullWrap.style.transform="scale("+s+")";
 }
-document.getElementById("thumb").addEventListener("click",()=>{
-  fullFrame.contentWindow.location.replace(srcHtml); sizeFull(); overlay.classList.add("show");
-});
+function setQuery(key,val){
+  const p=new URLSearchParams(location.search);
+  if(val==null) p.delete(key); else p.set(key,val);
+  history.replaceState(null,"","?"+p.toString());
+}
+function openFull(src, idx){
+  fullFrame.src = src; sizeFull(); overlay.classList.add("show");
+  if(idx) setQuery("image", idx);
+}
 overlay.addEventListener("click",()=>{
-  overlay.classList.remove("show"); fullFrame.contentWindow.location.replace("about:blank");
+  overlay.classList.remove("show"); fullFrame.src="about:blank";
+  setQuery("image", null);
 });
 addEventListener("resize",()=>{ if(overlay.classList.contains("show")) sizeFull(); });
 </script>

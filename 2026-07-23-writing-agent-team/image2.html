@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>写作 Agent 团队 · 辩论流程</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1440px;}
+  body{
+    background:#1f1a14;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#ece1cc; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.07; mix-blend-mode:screen;
+  }
+  .page{position:relative; padding:96px 80px 80px; height:1440px; display:flex; flex-direction:column;}
+  header{margin-bottom:30px;}
+  .kicker{font-size:26px; color:#8a7f6e; letter-spacing:0.2em; margin-bottom:12px;}
+  .title{font-family:"Ma Shan Zheng",cursive; font-size:118px; line-height:1.05; color:#ece1cc; letter-spacing:0.04em;}
+  .subtitle{font-size:30px; color:#e8843a; margin-top:16px; letter-spacing:0.02em;}
+
+  .flow{position:relative; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:8px 0;}
+  .node{
+    width:780px; min-height:128px; background:#2a241b; border:2px solid #3a3225;
+    border-radius:14px; padding:16px 26px; display:flex; gap:22px; align-items:center;
+    position:relative; z-index:2;
+  }
+  .node.hot{ border-color:#e8843a; }
+  .node.final{ background:#e8843a; border-color:#e8843a; }
+  .num{
+    width:54px; height:54px; border-radius:50%; background:#e8843a; color:#1f1a14;
+    font-family:"Ma Shan Zheng",cursive; font-size:30px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .final .num{ background:#1f1a14; color:#e8843a; }
+  .nb{flex:1;}
+  .nh{font-family:"Ma Shan Zheng",cursive; font-size:38px; line-height:1.15; color:#ece1cc;}
+  .final .nh{color:#1f1a14;}
+  .nd{font-size:22px; color:#9c907c; margin-top:6px; line-height:1.4;}
+  .final .nd{color:#3a2410;}
+  .nd .em{color:#e8843a;}
+  .final .nd .em{color:#1f1a14; font-weight:700;}
+  .tag{display:inline-block; font-size:19px; color:#8a7f6e; margin-top:6px;}
+
+  .arr{width:34px; height:40px; margin:2px 0; z-index:2;}
+
+  .sig{display:flex; align-items:center; gap:14px; font-family:"Songti SC",serif; font-weight:700; font-size:26px; color:#ece1cc; margin-top:14px;}
+  .sig .bar{width:26px;height:2px;background:#e8843a;display:inline-block;}
+  .entag{position:absolute; right:80px; bottom:84px; font-size:20px; letter-spacing:0.32em; color:#8a7f6e;}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="kicker">— generator–critic 交替辩论 —</div>
+    <div class="title">吵到收敛为止</div>
+    <div class="subtitle">创作 → 全员挑刺 → 编辑裁决 · 循环最多 5 轮</div>
+  </header>
+
+  <div class="flow">
+    <div class="node">
+      <div class="num">1</div>
+      <div class="nb">
+        <div class="nh">创作阶段</div>
+        <div class="nd">3 个创作者发散 idea / 反驳上轮挑刺</div>
+        <div class="tag">造梦者 · 历史指导 · 科学指导</div>
+      </div>
+    </div>
+    <svg class="arr" viewBox="0 0 34 40"><path d="M17 2 L17 30 M6 22 L17 34 L28 22" stroke="#e8843a" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+    <div class="node hot">
+      <div class="num">2</div>
+      <div class="nb">
+        <div class="nh">评审阶段 · 全员挑刺</div>
+        <div class="nd">程颐程颢审 OOC「<span class="em">激烈反对也不附和</span>」+ 导演挑结构 + 科学/历史勘误</div>
+      </div>
+    </div>
+    <svg class="arr" viewBox="0 0 34 40"><path d="M17 2 L17 30 M6 22 L17 34 L28 22" stroke="#e8843a" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+    <div class="node hot">
+      <div class="num">3</div>
+      <div class="nb">
+        <div class="nh">编辑裁决</div>
+        <div class="nd">归类整合 + 行使<span class="em">否决权</span>（留理由）+ 给下轮指引；未收敛则<span class="em">回到①</span>（最多 5 轮 · 第 4 轮起禁提新）</div>
+      </div>
+    </div>
+    <svg class="arr" viewBox="0 0 34 40"><path d="M17 2 L17 30 M6 22 L17 34 L28 22" stroke="#e8843a" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+    <div class="node">
+      <div class="num">4</div>
+      <div class="nb">
+        <div class="nh">收敛</div>
+        <div class="nd">最多 5 轮；第 4 轮起全员只能解释/反驳，<span class="em">禁止提新</span></div>
+      </div>
+    </div>
+    <svg class="arr" viewBox="0 0 34 40"><path d="M17 2 L17 30 M6 22 L17 34 L28 22" stroke="#e8843a" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+    <div class="node final">
+      <div class="num">5</div>
+      <div class="nb">
+        <div class="nh">人工拍板</div>
+        <div class="nd">编辑出定稿故事线，<span class="em">你拍板</span>——agent 不自行定稿</div>
+      </div>
+    </div>
+
+    <div class="sig"><span class="bar"></span>Khan驾到</div>
+  </div>
+</div>
+<div class="entag">DEBATE LOOP</div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>写作 Agent 团队 · 圆桌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1440px;}
+  body{
+    background:#1f1a14;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#ece1cc; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.07; mix-blend-mode:screen;
+  }
+  .page{position:relative; padding:96px 80px 80px; height:1440px; display:flex; flex-direction:column;}
+  header{margin-bottom:14px;}
+  .kicker{font-size:26px; color:#8a7f6e; letter-spacing:0.2em; margin-bottom:12px;}
+  .title{font-family:"Ma Shan Zheng",cursive; font-size:118px; line-height:1.05; color:#ece1cc; letter-spacing:0.04em;}
+  .subtitle{font-size:31px; color:#e8843a; margin-top:16px; letter-spacing:0.02em;}
+  .tablewrap{flex:1; display:flex; align-items:center; justify-content:center;}
+  .tablewrap svg{width:1000px; height:1000px;}
+  .sig{display:flex; align-items:center; gap:14px; font-family:"Songti SC",serif; font-weight:700; font-size:26px; color:#ece1cc;}
+  .sig .bar{width:26px;height:2px;background:#e8843a;display:inline-block;}
+  .entag{position:absolute; right:80px; bottom:84px; font-size:20px; letter-spacing:0.32em; color:#8a7f6e;}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="kicker">— multi-agent 写作团队 —</div>
+    <div class="title">组个团队写小说</div>
+    <div class="subtitle">7 个 agent · 编辑居中裁决 · 对抗式评审</div>
+  </header>
+
+  <div class="tablewrap">
+    <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="ca"><circle cx="500" cy="150" r="44"/></clipPath>
+        <clipPath id="cb"><circle cx="820" cy="310" r="44"/></clipPath>
+        <clipPath id="cc"><circle cx="820" cy="700" r="44"/></clipPath>
+        <clipPath id="cd"><circle cx="500" cy="860" r="44"/></clipPath>
+        <clipPath id="ce"><circle cx="180" cy="700" r="44"/></clipPath>
+        <clipPath id="cf"><circle cx="180" cy="310" r="44"/></clipPath>
+        <clipPath id="cg"><circle cx="500" cy="500" r="58"/></clipPath>
+      </defs>
+
+      <circle cx="500" cy="500" r="240" fill="#2a241b" stroke="#ece1cc" stroke-width="3" opacity="0.95"/>
+
+      <!-- 中心：编辑（我） -->
+      <circle cx="500" cy="500" r="60" fill="#1f1a14" stroke="#e8843a" stroke-width="5"/>
+      <image href="../assets/avatar.png" x="442" y="442" width="116" height="116" clip-path="url(#cg)" preserveAspectRatio="xMidYMid slice"/>
+      <text x="500" y="600" text-anchor="middle" font-family="'LXGW Bright'" font-size="30" fill="#ece1cc">编辑（我）</text>
+      <text x="500" y="632" text-anchor="middle" font-family="'LXGW Bright'" font-size="22" fill="#e8843a">裁决 · 否决权</text>
+      <text x="500" y="694" text-anchor="middle" font-family="'LXGW Bright'" font-size="20" fill="#8a7f6e">shared story bible · 共享设定</text>
+
+      <!-- 上：造梦者（创作者）crop=faces 脸居中 → 图中心对齐圆心 -->
+      <circle cx="500" cy="150" r="48" fill="#1f1a14" stroke="#ece1cc" stroke-width="4"/>
+      <image href="avatars/dreamer.jpg" x="456" y="88" width="88" height="124" clip-path="url(#ca)" preserveAspectRatio="xMidYMid meet"/>
+      <text x="500" y="222" text-anchor="middle" font-family="'LXGW Bright'" font-size="30" fill="#ece1cc">造梦者</text>
+      <text x="500" y="252" text-anchor="middle" font-family="'LXGW Bright'" font-size="22" fill="#8a7f6e">发散意外情节</text>
+
+      <!-- 右上：导演（评审） -->
+      <circle cx="820" cy="310" r="48" fill="#1f1a14" stroke="#e8843a" stroke-width="4"/>
+      <image href="avatars/director.jpg" x="776" y="248" width="88" height="124" clip-path="url(#cb)" preserveAspectRatio="xMidYMid meet"/>
+      <text x="820" y="382" text-anchor="middle" font-family="'LXGW Bright'" font-size="30" fill="#ece1cc">导演</text>
+      <text x="820" y="412" text-anchor="middle" font-family="'LXGW Bright'" font-size="22" fill="#8a7f6e">挑戏剧结构</text>
+
+      <!-- 右下：科学顾问（创作者） -->
+      <circle cx="820" cy="700" r="48" fill="#1f1a14" stroke="#ece1cc" stroke-width="4"/>
+      <image href="avatars/science.jpg" x="776" y="638" width="88" height="124" clip-path="url(#cc)" preserveAspectRatio="xMidYMid meet"/>
+      <text x="820" y="772" text-anchor="middle" font-family="'LXGW Bright'" font-size="30" fill="#ece1cc">科学顾问</text>
+      <text x="820" y="802" text-anchor="middle" font-family="'LXGW Bright'" font-size="22" fill="#8a7f6e">理论零容错</text>
+
+      <!-- 下：程颢代表（评审）古画脸在上部 -->
+      <circle cx="500" cy="860" r="48" fill="#1f1a14" stroke="#e8843a" stroke-width="4"/>
+      <image href="avatars/chenghao.jpg" x="455" y="790" width="88" height="124" clip-path="url(#cd)" preserveAspectRatio="xMidYMid meet"/>
+      <text x="500" y="932" text-anchor="middle" font-family="'LXGW Bright'" font-size="30" fill="#ece1cc">程颢代表</text>
+      <text x="500" y="962" text-anchor="middle" font-family="'LXGW Bright'" font-size="22" fill="#e8843a">审 OOC · 寸步不让</text>
+
+      <!-- 左下：历史顾问（创作者） -->
+      <circle cx="180" cy="700" r="48" fill="#1f1a14" stroke="#ece1cc" stroke-width="4"/>
+      <image href="avatars/history.jpg" x="136" y="638" width="88" height="124" clip-path="url(#ce)" preserveAspectRatio="xMidYMid meet"/>
+      <text x="180" y="772" text-anchor="middle" font-family="'LXGW Bright'" font-size="30" fill="#ece1cc">历史顾问</text>
+      <text x="180" y="802" text-anchor="middle" font-family="'LXGW Bright'" font-size="22" fill="#8a7f6e">典故 · 史实</text>
+
+      <!-- 左上：程颐代表（评审）古画脸在上部 -->
+      <circle cx="180" cy="310" r="48" fill="#1f1a14" stroke="#e8843a" stroke-width="4"/>
+      <image href="avatars/chengyi.jpg" x="135" y="256" width="88" height="124" clip-path="url(#cf)" preserveAspectRatio="xMidYMid meet"/>
+      <text x="180" y="382" text-anchor="middle" font-family="'LXGW Bright'" font-size="30" fill="#ece1cc">程颐代表</text>
+      <text x="180" y="412" text-anchor="middle" font-family="'LXGW Bright'" font-size="22" fill="#e8843a">审 OOC · 激烈反对</text>
+
+      <g font-family="'LXGW Bright'" font-size="20" fill="#8a7f6e">
+        <circle cx="640" cy="930" r="8" fill="none" stroke="#ece1cc" stroke-width="2.5"/>
+        <text x="660" y="937">创作者</text>
+        <circle cx="770" cy="930" r="8" fill="none" stroke="#e8843a" stroke-width="2.5"/>
+        <text x="790" y="937">评审者（对抗）</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="sig"><span class="bar"></span>Khan驾到</div>
+</div>
+<div class="entag">WRITING TEAM</div>
+</body>
+</html>
