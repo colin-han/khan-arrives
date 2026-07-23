@@ -35,6 +35,7 @@
   .mitem:hover { background:#f7f7f7; }
   .mitem.active { color:#576b95; font-weight:600; background:#f2f5fa; border-left-color:#576b95; }
   .mitem .day { color:#b2b2b2; font-size:12px; margin-right:7px; font-variant-numeric:tabular-nums; }
+  .mitem .day.vdash { display:inline-block; width:0; height:14px; border-left:1.5px dashed #c4c4c4; margin-right:14px; vertical-align:middle; }
   .mitem.active .day { color:#8ba0c4; }
   .sidebar .empty { padding:10px 18px; font-size:12px; color:#999; line-height:1.6; }
 
@@ -215,18 +216,27 @@ function buildMenu(topics, topic){
     const ym = t.slice(0, 7);
     (groups[ym] = groups[ym] || []).push(t);
   });
+  let lastDate = null;
   Object.keys(groups).sort().reverse().forEach(ym => {
     const title = document.createElement("div");
     title.className = "mtitle";
     title.textContent = ym.replace(/^(\d{4})-(\d{2})$/, (_, y, m) => `${y} 年 ${Number(m)} 月`);
     menu.appendChild(title);
     groups[ym].sort().reverse().forEach(t => {
+      const date = t.slice(0, 10);
+      const sameDay = date === lastDate;
+      lastDate = date;
       const a = document.createElement("a");
       a.className = "mitem" + (t === topic ? " active" : "");
       a.href = "?topic=" + encodeURIComponent(t);
       a.dataset.topic = t;
       const day = document.createElement("span");
-      day.className = "day"; day.textContent = t.slice(8, 10) + "日";
+      if(sameDay){
+        day.className = "day vdash";
+      } else {
+        day.className = "day";
+        day.textContent = t.slice(8, 10) + "日";
+      }
       a.appendChild(day);
       a.appendChild(document.createTextNode(t.replace(/^\d{4}-\d{2}-\d{2}-/, "")));
       a.addEventListener("click", e => {
