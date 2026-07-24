@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>一岗拆两班</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1440px;}
+  body{
+    background-color:#faf7f2;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#231709; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* 纸纹 */
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05; mix-blend-mode:multiply;
+  }
+  .page{position:relative; padding:80px 92px 60px; height:1440px; display:flex; flex-direction:column;}
+
+  /* 标题区 */
+  header{margin-bottom:6px;}
+  .title{
+    font-family:"Ma Shan Zheng",cursive;
+    font-size:104px; line-height:1.05; color:#1c1a17; letter-spacing:0.05em;
+  }
+  .subtitle{
+    font-family:"SF Mono",Menlo,monospace; font-size:27px; color:#d4441c;
+    margin-top:12px; letter-spacing:0.04em;
+  }
+  .lede{font-size:31px; line-height:1.6; color:#4a4238; margin-top:14px;}
+  .lede .hl{color:#d4441c;}
+
+  /* 主图 */
+  .chart{flex:1; display:flex; align-items:center;}
+  .chart svg{width:100%; height:auto; display:block;}
+
+  /* 目标线 */
+  .goal{margin-top:4px; padding-top:20px; border-top:2px dashed #d8cfc0;}
+  .goal svg{width:100%; height:auto; display:block;}
+
+  /* 署名（流式） */
+  .foot{margin-top:22px; display:flex; justify-content:space-between; align-items:center;}
+  .sig{display:flex; align-items:center; gap:14px; font-family:"Songti SC",serif; font-weight:700; font-size:26px;}
+  .sig .bar{width:26px;height:2px;background:#d4441c;display:inline-block;}
+  .sig .theme{font-family:"LXGW Bright","PingFang SC",sans-serif; font-weight:400; font-size:21px; color:#9a9286;}
+  .entag{font-size:20px; letter-spacing:0.32em; color:#9a9286;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="title">一岗拆两班</div>
+    <div class="subtitle">split the heartbeat: discovery / heartbeat</div>
+    <div class="lede">昨天把心跳 cron 拆开——<span class="hl">发现的归发现，保养的归保养</span>。</div>
+  </header>
+
+  <div class="chart">
+    <svg viewBox="0 0 900 705" fill="none">
+
+      <!-- ===== 之前：灰调小卡 ===== -->
+      <rect x="30" y="8" width="580" height="200" rx="16" fill="#f0ece4"/>
+      <text x="56" y="48" font-size="23" fill="#4a4238">之前 · 心跳 cron 一人全包</text>
+      <!-- 小巡逻圈 + 钟 -->
+      <circle cx="128" cy="132" r="42" stroke="#1c1a17" stroke-width="3"/>
+      <g transform="translate(128 90)"><path d="M-8 -6 L8 0 L-8 6 Z" fill="#1c1a17"/></g>
+      <circle cx="128" cy="132" r="14" stroke="#1c1a17" stroke-width="2.5"/>
+      <line x1="128" y1="132" x2="128" y2="123" stroke="#1c1a17" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="128" y1="132" x2="136" y2="135" stroke="#1c1a17" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- 圈上小图标：放大镜 / 扳手 -->
+      <circle cx="182" cy="112" r="9" stroke="#4a4238" stroke-width="2.5"/>
+      <line x1="188" y1="119" x2="197" y2="128" stroke="#4a4238" stroke-width="3" stroke-linecap="round"/>
+      <g transform="translate(184 160) rotate(40)" stroke="#4a4238" fill="none">
+        <path d="M-5 -12 A9 9 0 1 0 5 -12 L5 -19 M-5 -12 L-5 -19" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="0" y1="-3" x2="0" y2="20" stroke-width="4.5" stroke-linecap="round"/>
+      </g>
+      <!-- 右侧说明 -->
+      <text x="228" y="106" font-size="24" fill="#231709">每隔几分钟转一圈：</text>
+      <text x="228" y="142" font-size="24" fill="#231709">找新卡、做保养，全在一趟里</text>
+      <text x="228" y="182" font-size="20" fill="#9a9286">新卡出现，得等下一圈才被看见</text>
+
+      <!-- 右上手记：为什么拆 -->
+      <text x="648" y="66" font-size="22" fill="#4a4238">为什么拆？</text>
+      <text x="648" y="100" font-size="21" fill="#9a9286">保养按点来就行，</text>
+      <text x="648" y="130" font-size="21" fill="#9a9286">发现新卡越快越好——</text>
+      <text x="648" y="160" font-size="21" fill="#d4441c">节奏不一样，就分开</text>
+
+      <!-- ===== 分叉箭头 ===== -->
+      <path d="M255 212 C 240 248, 234 258, 231 280" stroke="#1c1a17" stroke-width="3" stroke-linecap="round"/>
+      <g transform="translate(230 288) rotate(96)"><path d="M-8 -6 L8 0 L-8 6 Z" fill="#1c1a17"/></g>
+      <path d="M370 212 C 480 250, 590 258, 648 282" stroke="#1c1a17" stroke-width="3" stroke-linecap="round"/>
+      <g transform="translate(655 285) rotate(26)"><path d="M-8 -6 L8 0 L-8 6 Z" fill="#1c1a17"/></g>
+
+      <!-- ===== 左卡：heartbeat 保养班 ===== -->
+      <rect x="30" y="300" width="400" height="390" rx="18" stroke="#1c1a17" stroke-width="3.5" fill="#faf7f2"/>
+      <text x="230" y="354" font-size="28" fill="#1c1a17" text-anchor="middle">heartbeat · 保养班</text>
+      <!-- 钟 + 扳手 -->
+      <circle cx="218" cy="462" r="52" stroke="#1c1a17" stroke-width="3.5"/>
+      <line x1="218" y1="462" x2="218" y2="428" stroke="#1c1a17" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="218" y1="462" x2="245" y2="470" stroke="#1c1a17" stroke-width="3.5" stroke-linecap="round"/>
+      <g transform="translate(276 512) rotate(40)" stroke="#4a4238" fill="none">
+        <path d="M-8 -20 A14 14 0 1 0 8 -20 L8 -31 M-8 -20 L-8 -31" stroke-width="4" stroke-linecap="round"/>
+        <line x1="0" y1="-5" x2="0" y2="36" stroke-width="7" stroke-linecap="round"/>
+      </g>
+      <!-- 说明 -->
+      <text x="230" y="596" font-size="24" fill="#231709" text-anchor="middle">还是按点转，只管维护：</text>
+      <text x="230" y="630" font-size="24" fill="#231709" text-anchor="middle">清理超时、对齐状态、善后</text>
+      <text x="230" y="666" font-size="20" fill="#9a9286" text-anchor="middle">不再操心找新卡</text>
+
+      <!-- ===== 右卡：discovery 发现班 ===== -->
+      <rect x="470" y="300" width="400" height="390" rx="18" stroke="#d4441c" stroke-width="3.5" fill="#faf7f2"/>
+      <text x="670" y="354" font-size="28" fill="#d4441c" text-anchor="middle">discovery · 发现班</text>
+      <!-- 预留探头位（虚线摄像头，装在卡顶） -->
+      <g stroke="#d4441c" stroke-width="3" stroke-dasharray="8 6" fill="none">
+        <line x1="806" y1="298" x2="806" y2="266"/>
+        <rect x="768" y="228" width="72" height="40" rx="9" transform="rotate(-10 804 248)"/>
+        <circle cx="778" cy="252" r="7" transform="rotate(-10 804 248)"/>
+      </g>
+      <text x="744" y="250" font-size="20" fill="#d4441c" text-anchor="end">预留的探头位：watch</text>
+      <!-- 眼睛盯着新卡 -->
+      <path d="M540 462 Q 575 434, 610 462 Q 575 490, 540 462 Z" stroke="#1c1a17" stroke-width="3.5"/>
+      <circle cx="575" cy="462" r="10" fill="#1c1a17"/>
+      <line x1="618" y1="462" x2="648" y2="462" stroke="#9a9286" stroke-width="3" stroke-dasharray="7 6"/>
+      <rect x="656" y="422" width="110" height="80" rx="10" stroke="#1c1a17" stroke-width="3.5"/>
+      <line x1="674" y1="450" x2="748" y2="450" stroke="#4a4238" stroke-width="3" stroke-linecap="round"/>
+      <line x1="674" y1="474" x2="726" y2="474" stroke="#4a4238" stroke-width="3" stroke-linecap="round"/>
+      <!-- 新卡火花 -->
+      <g stroke="#d4441c" stroke-width="3" stroke-linecap="round">
+        <line x1="772" y1="414" x2="784" y2="402"/>
+        <line x1="780" y1="430" x2="796" y2="428"/>
+        <line x1="760" y1="406" x2="762" y2="392"/>
+      </g>
+      <!-- 说明 -->
+      <text x="670" y="586" font-size="24" fill="#231709" text-anchor="middle">专职盯新卡</text>
+      <text x="670" y="622" font-size="24" fill="#d4441c" text-anchor="middle">接下来装上 watch：卡一动，</text>
+      <text x="670" y="656" font-size="24" fill="#d4441c" text-anchor="middle">立刻看见，不用等下一圈</text>
+    </svg>
+  </div>
+
+  <div class="goal">
+    <svg viewBox="0 0 900 160" fill="none">
+      <text x="20" y="26" font-size="22" fill="#4a4238">目标：feature 人盯着做（HITL），bug 交给 loop 自己修（HOTL）</text>
+      <!-- 主线 -->
+      <line x1="20" y1="88" x2="560" y2="88" stroke="#1c1a17" stroke-width="3" stroke-linecap="round"/>
+      <line x1="560" y1="88" x2="800" y2="88" stroke="#1c1a17" stroke-width="3" stroke-linecap="round" stroke-dasharray="10 8"/>
+      <!-- 三个已完成刻度 -->
+      <circle cx="100" cy="88" r="8" fill="#faf7f2" stroke="#1c1a17" stroke-width="3"/>
+      <text x="100" y="62" font-size="18" fill="#9a9286" text-anchor="middle">7.22</text>
+      <text x="100" y="122" font-size="20" fill="#231709" text-anchor="middle">取卡加价值判断</text>
+      <circle cx="280" cy="88" r="8" fill="#faf7f2" stroke="#1c1a17" stroke-width="3"/>
+      <text x="280" y="62" font-size="18" fill="#9a9286" text-anchor="middle">7.23</text>
+      <text x="280" y="122" font-size="20" fill="#231709" text-anchor="middle">独立消息队列</text>
+      <circle cx="460" cy="88" r="11" fill="#d4441c" stroke="none"/>
+      <text x="460" y="62" font-size="18" fill="#d4441c" text-anchor="middle">7.24</text>
+      <text x="460" y="122" font-size="20" fill="#d4441c" text-anchor="middle">拆出 discovery</text>
+      <!-- 下一步 -->
+      <circle cx="644" cy="88" r="8" fill="#faf7f2" stroke="#d4441c" stroke-width="3" stroke-dasharray="6 5"/>
+      <text x="644" y="62" font-size="18" fill="#d4441c" text-anchor="middle">接下来</text>
+      <text x="644" y="122" font-size="20" fill="#d4441c" text-anchor="middle">watch</text>
+      <!-- 终点旗 -->
+      <line x1="810" y1="88" x2="810" y2="44" stroke="#1c1a17" stroke-width="3" stroke-linecap="round"/>
+      <path d="M810 44 L854 55 L810 66 Z" fill="#d4441c"/>
+      <text x="810" y="122" font-size="20" fill="#231709" text-anchor="middle">HOTL 修 bug</text>
+      <text x="810" y="150" font-size="18" fill="#9a9286" text-anchor="middle">TaskTrack 开工前收尾</text>
+    </svg>
+  </div>
+
+  <div class="foot">
+    <div class="sig"><span class="bar"></span>Khan驾到<span class="theme">怎样让人和 Agent 协作得更好？</span></div>
+    <div class="entag">DISCOVERY · HEARTBEAT</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+昨天对心跳 cron 做了重构，拆成两部分：discovery / heartbeat。让心跳承担维护的工作，discovery 就可以添加 watch 机制了。TaskTrack 马上开工，争取开工前把这套收尾，离「feature 人盯着做、bug 交给 loop」又近一步。
