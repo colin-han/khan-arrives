@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>人的价值</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1440px;}
+  body{
+    background-color:#faf7f2;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#231709; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05; mix-blend-mode:multiply;
+  }
+  .page{position:relative; padding:60px 72px 44px; height:1440px; display:flex; flex-direction:column;}
+
+  header{position:relative;}
+  .title{
+    font-family:"Ma Shan Zheng",cursive;
+    font-size:84px; line-height:1.05; color:#1c1a17; letter-spacing:0.04em;
+  }
+  .subtitle{
+    font-family:"SF Mono",Menlo,monospace; font-size:24px; color:#d4441c;
+    margin-top:10px; letter-spacing:0.04em;
+  }
+  .lede{font-size:30px; line-height:1.6; color:#4a4238; margin-top:16px;}
+  .lede .hl{color:#d4441c;}
+
+  .chart{flex:1; display:flex; align-items:center; margin-top:4px;}
+  .chart svg{width:100%; height:auto; display:block;}
+
+  .foot{margin-top:6px; display:flex; justify-content:space-between; align-items:center;}
+  .sig{display:flex; align-items:center; gap:14px; font-family:"Songti SC",serif; font-weight:700; font-size:26px;}
+  .sig .bar{width:26px;height:2px;background:#d4441c;display:inline-block;}
+  .sig .theme{font-family:"LXGW Bright","PingFang SC",sans-serif; font-weight:400; font-size:21px; color:#9a9286;}
+  .entag{font-size:20px; letter-spacing:0.32em; color:#9a9286;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="title">人的价值</div>
+    <div class="subtitle">the value of a human in the loop</div>
+    <div class="lede">和 AI 协作越久，越能看到人的价值——<br>失去人的指引，AI 就像<span class="hl">个孩子一样无助</span>。</div>
+  </header>
+
+  <div class="chart">
+    <svg viewBox="0 250 936 730" fill="none">
+
+      <!-- ===== 远处：三条走不通的岔路（灰调虚线） ===== -->
+      <!-- 岔路口 -->
+      <circle cx="520" cy="700" r="9" fill="#9a9286"/>
+
+      <!-- 岔路1：左上，尽头是坑 -->
+      <path d="M520 700 C 440 630, 330 560, 250 470" stroke="#9a9286" stroke-width="3.5" stroke-dasharray="12 11" stroke-linecap="round"/>
+      <g stroke="#9a9286" stroke-width="3.5" fill="none" stroke-linecap="round">
+        <path d="M196 452 C 208 476, 268 476, 282 452"/>
+        <path d="M196 452 C 200 444, 278 444, 282 452"/>
+      </g>
+      <text x="240" y="416" font-size="25" fill="#9a9286" text-anchor="middle">改错了地方</text>
+
+      <!-- 岔路2：中上，尽头是迷雾 -->
+      <path d="M520 700 C 510 600, 496 500, 476 420" stroke="#9a9286" stroke-width="3.5" stroke-dasharray="12 11" stroke-linecap="round"/>
+      <g stroke="#9a9286" stroke-width="3.5" fill="none" stroke-linecap="round">
+        <path d="M420 386 q 18 -16 40 -6 q 16 -18 40 -8 q 22 -8 34 6"/>
+        <path d="M436 356 q 16 -12 34 -4 q 14 -14 34 -6"/>
+      </g>
+      <text x="484" y="316" font-size="25" fill="#9a9286" text-anchor="middle">环境起不来</text>
+
+      <!-- 岔路3：右上，尽头是路障 -->
+      <path d="M520 700 C 600 630, 680 570, 730 500" stroke="#9a9286" stroke-width="3.5" stroke-dasharray="12 11" stroke-linecap="round"/>
+      <g stroke="#9a9286" stroke-width="3.5" fill="#faf7f2" stroke-linecap="round">
+        <path d="M700 478 L 780 478 L 770 452 L 710 452 Z"/>
+        <line x1="712" y1="478" x2="712" y2="496"/>
+        <line x1="768" y1="478" x2="768" y2="496"/>
+        <line x1="718" y1="474" x2="736" y2="456"/>
+        <line x1="744" y1="474" x2="762" y2="456"/>
+      </g>
+      <text x="742" y="424" font-size="25" fill="#9a9286" text-anchor="middle">验证过不去</text>
+
+      <!-- 岔路口的问号 -->
+      <text x="556" y="668" font-size="44" fill="#9a9286" font-family="Ma Shan Zheng,cursive">？</text>
+
+      <!-- ===== 对的路：developer 指的那条（朱红实线，通向小旗） ===== -->
+      <path d="M520 700 C 640 680, 760 620, 830 520 C 866 468, 884 420, 890 380" stroke="#d4441c" stroke-width="5" stroke-linecap="round"/>
+      <g stroke="#d4441c" stroke-width="4" stroke-linecap="round">
+        <line x1="890" y1="380" x2="890" y2="318"/>
+        <path d="M890 318 L 846 330 L 890 344 Z" fill="#d4441c"/>
+      </g>
+      <text x="864" y="284" font-size="26" fill="#d4441c" text-anchor="end">这边能走通</text>
+
+      <!-- ===== developer：牵着骆小普，另一只手指路 ===== -->
+      <!-- 头 -->
+      <circle cx="238" cy="536" r="38" stroke="#1c1a17" stroke-width="4.5" fill="#faf7f2"/>
+      <!-- 头发几笔 -->
+      <path d="M212 512 C 220 498, 254 496, 264 510" stroke="#1c1a17" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- 身体 -->
+      <g stroke="#1c1a17" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M214 570 C 202 574, 196 588, 195 602 L 190 712 C 189 724, 202 732, 216 732 L 262 732 C 276 732, 289 724, 288 712 L 283 602 C 282 588, 275 574, 264 570 Z" fill="#faf7f2"/>
+        <!-- 右臂：抬起指向红路 -->
+        <path d="M276 584 C 322 560, 368 546, 412 542"/>
+        <!-- 指尖小线 -->
+        <path d="M412 542 L 434 538"/>
+        <!-- 左臂：垂下牵手（伸向骆小普一侧） -->
+        <path d="M282 596 C 292 640, 296 680, 298 712"/>
+        <!-- 腿 -->
+        <path d="M224 732 L 220 806 L 238 806"/>
+        <path d="M262 732 L 270 804 L 288 804"/>
+      </g>
+
+      <!-- ===== 牵手点 ===== -->
+      <circle cx="299" cy="716" r="7" fill="#d4441c"/>
+
+      <!-- ===== 骆小普（孩子个头，仰头看 developer） ===== -->
+      <!-- 举起的手臂（牵着 developer） -->
+      <path d="M322 776 C 314 756, 306 736, 300 718" stroke="#1c1a17" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+      <!-- 身体 -->
+      <g stroke="#1c1a17" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M318 762 C 308 764, 302 772, 301 782 L 297 836 C 296 846, 306 852, 317 852 L 379 852 C 390 852, 400 846, 399 836 L 395 782 C 394 772, 388 764, 378 764 Z" fill="#faf7f2"/>
+        <!-- 另一只手：抓着衣角 -->
+        <path d="M390 780 C 402 798, 406 816, 402 832"/>
+        <!-- 腿（小短腿） -->
+        <path d="M326 852 L 324 898 L 340 898"/>
+        <path d="M372 852 L 378 896 L 394 896"/>
+      </g>
+      <!-- 羊驼头（小号，微仰头看向 developer，镜像朝左=朝向大人） -->
+      <g transform="rotate(-8 348 706)">
+        <svg x="286" y="640" width="128" height="122" viewBox="0 8 40 38">
+          <image x="0" y="0" width="128" height="128" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHBhdGggZmlsbD0iIzk1NzE1NSIgZD0iTTk0LjgyIDUyLjM2czQuMzktNC4zMSA5LjQ4LTQuMTNjNS40NC4xOSA5LjQzIDMuMTQgMTAuNzUgNy42NWMxLjMxIDQuNSAxLjQ1IDYuMjQgMi40NCA3LjdjLjk5IDEuNDUgMi4yNSAyLjQ5IDIuMjUgMy4yOHMtLjk0IDEuODMtMi4yMSAyLjM1cy0zLjQ3LS4wOS0zLjQ3LS4wOXMtLjU2IDIuODItMi42MyAzLjQ3Yy0yLjA2LjY2LTMuOTQuNDItMy45NC40MmwtMi42My0xMC4xOHMxLjg0LTIuNzkuMzgtNC43NGMtMS45Ny0yLjYyLTUuNDYtLjE4LTUuNDYtLjE4ek02OC40MyA5My44MnMtLjc1IDUuMDItMS42OSA2LjY2cy0xLjM2IDEuOTctMS4zNiAxLjk3cy0uMDUgOC4yNi0uMDUgMTAuNTZjMCAxLjc5LjQ2IDQuNDEtLjU2IDUuMjFjLTEuMjcuOTktNi4yOSAxLjAzLTYuOTkgMHMxLjg4LTMuMzMgMS45Ny00LjA0Yy4wOS0uNy0uMjgtNy43LS4zMy05LjA2cy0yLjM2LTEwLjMtMi4zNi0xMC4zem0zMC4zNyA2LjcxYy4zOC41OS44OCA3LjIzLjk3IDkuMjlzLjA5IDUuNC0uMDUgNS45MWMtLjE0LjUyLTMuMjQgMy4wNS0yLjExIDMuOTlzNy4wOS4zOCA3LjU2LS40N2MuNDctLjg0LjQyLTE4LjExLjQyLTE5LjUyYzAtMS4wOC0xLjg0LTUuNS0yLjUxLTYuNWMtLjY1LS45OC00LjY1IDYuNzEtNC4yOCA3LjMiLz48cGF0aCBmaWxsPSIjREI3QzYwIiBkPSJNMjAuNjMgMTYuOXMtMS4xOS0xLjk0LTIuNS0zLjdjLTEuNTEtMi4wMi0zLjE3LTMuOC0zLjEtNC40N2MuMDgtLjc2IDEuMy0uNDkgMS4zLS40OWw0LjUgMy40NWwzLjY2IDUuMDd6bTMuOTgtMTEuNTFjLS4yNSAxLjA2IDEuOTYgMy42MSAzLjYzIDcuNzFjLjY4IDEuNjcgMS4yNyA2LjEyIDEuMjcgNi4xMmwyLjY3IDEuMjdzLTEuMDYtNi4wNS0yLjExLTguOHMtNC43OS05LjE4LTUuNDYtNi4zIi8+PHBhdGggZmlsbD0iI0ZGRDNCMiIgZD0iTTI0LjIyIDE1LjA3UzIxLjQgMTAgMTkuMTUgOC44MWMtMi4yNS0xLjItMy45NC0uNzQtMy43Ny0uMzJjLjMxLjc0IDMuMSAxLjkgNC40MyAzLjk0czMuNTUgNS41MyAzLjU1IDUuNTN6bS42NC0xMC4xM2MtLjA5LTEuNDEgNC4wMS4yOCA2LjM0IDMuNDVzMi44OSA1LjIxIDMuMDMgOC44cy0yLjYgMy40NS0yLjYgMy4yNHMtLjItNC40My0yLjA0LTkuMjJDMjguMzQgOCAyNC45MyA2LjA2IDI0Ljg2IDQuOTQiLz48cGF0aCBmaWxsPSIjRkZEM0IyIiBkPSJNMTkuNzkgMTkuNnMtMi41OCAxLjU1LTUuMDcgMi40OWMtMi4wMy43Ni02LjQ0IDIuMjgtNi4wOSA0LjI1Yy4xNC43OS0uODggMS43NS0uMzkgMy4yYy40MyAxLjI4IDEuMjUgMS4zOCAxLjU1IDEuNTVjLjQ5LjI4IDEuNTEgMi4yNSAzLjggMi40NWMyLjU3LjIyIDQuMDgtLjc1IDQuMDgtLjc1TDIzLjczIDM4bDguNTktOC4xMmwuNjEtOC45NmwtNi4xOS0yLjM1eiIvPjxwYXRoIGZpbGw9IiM3QjVCNTIiIGQ9Ik0xMS42OSAyOC41OXMyLjA0LTEuMjMgMi44OS0xLjY1Yy44NC0uNDIuNzctMi4xNS0uODQtMS41MWMtMS42Mi42My0yLjc4IDEuMzctMi43OCAxLjM3cy0xLjMtMS4wMi0xLjc2LTEuNDhzLTEuMzQuNTItLjQ2IDEuNjhjLjg4IDEuMTcgMS4yNiAxLjUyIDEuMjYgMS41MnMwIC43Ny0uMDQgMS4wNnMtMS45LTEuMjMtMS44Ny0uMjVjLjA0Ljk5LjI1IDEuNDggMS4zNCAxLjYyczEuNTUuMjEgMS41NS4yMXMxLjc2LjcgMy4zNC42N3MzLjgtMS44NyAzLjEzLTIuNTNjLS42Ny0uNjctMi4yOS43LTMuNzMuNjdjLTEuNDQtLjA0LTEuOS0uMjUtMS45LS4yNXoiLz48cGF0aCBmaWxsPSIjMkIyQTMyIiBkPSJNMjMuMTcgMjIuODVzMS4xNi0xLjIgMi40My0uNDljMS4yNy43Ljk5IDIuODItLjMyIDMuMTNjLTEuMjMuMy0yLjE1LS41Ni0yLjE1LS41NnMtMi41Ny4zNS0yLjQ2LS45OWMuMDktMS4xNiAyLjUtMS4wOSAyLjUtMS4wOSIvPjxwYXRoIGZpbGw9IiNBRTk1N0YiIGQ9Ik0yOC41MiAxMy45NXMtNC42NS0uMzEtNy42IDEuNjdzLTMuOTQgMy4yOC0zLjQzIDQuMThzMS44OC44OSAzLjYxLjc1YzEuNzQtLjE0IDMuNjYtLjM4IDUuNDktLjIzYzEuODMuMTQgMi45MS41NiAzLjU3Ljk0czEuNjQgMS4yMiAxLjY0IDEuMjJzLTEuOTIgMi42Mi0zLjQzIDQuOTdjLTEuNSAyLjM1LTIuMzkgMy44OS0zLjE5IDUuNzNjLS41OCAxLjM0LTEuMzYgMy4yNC0xLjM2IDMuMjRzLTIuMy0yLjE2LTIuODYtMi41M2MtLjU2LS4zOC0yLjU4LTEuNS0yLjU4LTEuNWwtLjk5LjYxcy0uMTQgMy45OSAxLjQ1IDguNDVzMy45OSA4LjMxIDMuOTkgOC4zMXMtLjQ3IDcuMDkgMy4zMyAxMy43YzIgMy40OSA2LjM4IDUuODcgNi4zOCA1Ljg3cy0uMjggNC43NCAyLjQ5IDcuODRzNS4xMiAzLjEgNS4xMiAzLjFzLjI4IDIuMTEgMS44OCA1LjQ5YzEuNjQgMy40NyAzLjcxIDQuNSAzLjcxIDQuNXMtLjU2IDMgLjM4IDcuOThjLjg1IDQuNDkgMy4zOCA2LjggMy4zOCA2LjhzLjMzIDEyLjA2IDAgMTIuODFzLTMuMSAzLjcxLTIuNTMgNC42OWMuNTYuOTkgMy4xIDEuMDggNC4zNiAxLjA4czMuMzMtLjQyIDMuODktLjk0cy43LTguNTkuNy0xMC4wOXMuMzMtNi45OS4zMy02Ljk5czMuNDctMS41NSA0LjY5LTQuMThzMS4wOC00Ljc0IDEuMDgtNC43NHM0LjE4LjUyIDkuMjktLjg5YzUuMTItMS40MSAxMC4yOC02LjA1IDEwLjI4LTYuMDVzMi44NiA1LjEyIDQuMjIgNy41MXMzLjg5IDUuNzcgMy44OSA1Ljc3cy4wNSAxMy42Ni0uMjMgMTQuMjJzLTMuNjYgNC41LTIuOTYgNS4yNmMuNy43NSAyLjQ0Ljg0IDQuMzYuOGMxLjkyLS4wNSAzLjg5LS4xNCA0LjI3LTEuMjdzMC0zLjYxLjA5LTUuNDlzLjQyLTEyLjA2LjQyLTEyLjA2czUuNDgtMy4wNiA3Ljk4LTkuNDNjMi4wNy01LjI4IDIuMDItMTAuNzkgMi4wMi0xMC43OXMxLjU1LTUuMDcgMS44My02Ljk1cy44NC01LjU4LTEuMzYtMTEuODdzLTcuMTgtMTMuNTYtMTQuNTktMTYuNjFzLTE0Ljg4LTMuMjQtMjEuMy0zLjE5Yy02LjQzLjA1LTE3LjY5IDEuNS0xOS41Mi45NHMtNS40LTUuNzctNi43Ni0xMS4yMmMtMS4zNi01LjQ0LTMtMTEuMzYtNS4zLTE0LjEycy00LjQxLTMuNjYtNC40MS0zLjY2cy0xLjEzIDMuNDMtMy4yNCAxLjk3Yy0xLjY4LTEuMTYtMS43OC0yLjU1LTEuOTItMy40OGMtLjE0LS45OS0uNTYtMi4xMi0uNTYtMi4xMiIvPjxwYXRoIGZpbGw9IiNGOEY5RkMiIGQ9Ik05My4zIDEwMS4zMmMuOTEuMjggMy43MS0xLjQ1IDQuOTctMi42M2MxLjU1LTEuNDQgMi4zOS0zLjk0IDIuMjUtNC43OWMtLjE0LS44NC0yLjIxIDEuNjktMi44Mi44czIuMjYtMi45OCAzLjI4LTQuNjVjMS40LTIuMjggMS43OS00LjE5IDEuMTgtNC41NnMtMi44NiAyLjY4LTMuNTMgMS42NWMtLjgzLTEuMjcuNjctMi40NyAyLjIzLTMuODRjMS40NC0xLjI3IDMuMDMtMi4zNiAzLjc4LTYuMDJzLjQ5LTkuMDMtLjgyLTEyLjA0Yy0xLjMxLTMtNS4zMy05LjMxLTEyLjgzLTEzLjY4Yy03LjUxLTQuMzYtMTguOTYtMy44NS0yMy41Ni0zLjcxcy0xNS45NiAyLjE2LTE3LjgzIDEuMjJjLTEuODgtLjk0LTUuMjYtMy03LjQxLTEwLjA5Yy0yLjE2LTcuMDktMi4wNi0xMC43Ny00LjMyLTE0LjVjLTEuMTMtMS44Ny0yLjkzLTMuMDctMi45My0zLjA3cy0yLjUxIDQuNTMtNC4xNSA3LjA2cy00LjQ2IDcuMjctNS40IDE0LjA4Yy0uOTQgNi44LjM5IDEyLjc1Ljk2IDE1LjIzYzEuMTggNS4xNiA1LjggOC4xOSA1LjggOC4xOXMuODQtMy4zNCAxLjA4LTQuMzZjLjM1LTEuNSAxLjEzLTMuMzggMi4xNi0yLjcycy0xIDguOTMtLjI2IDEyLjkzYy45NCA1LjA5IDUuMDQgNS4yMyA1LjA0IDUuMjNzLjM4LTIuNTggMS4zMS0zLjc1Yy45NC0xLjE3IDEuNDEtMS4yMiAxLjc4LS43NWMuMzguNDctLjgyIDQuMjgtLjE5IDguMTJjLjkyIDUuNTYgNC42MSA4LjQ3IDQuODkgOS4wOHMtMS4wOSAxMy40OCA2LjA0IDEzLjU5YzYuMTUuMDkgNC44OC02LjY2IDQuODgtNi42NnMyLjQ5LS44OSAzLTQuNDZzLS41Mi03LjY3LTEuMDMtOS4wMWMtMS4wMy0yLjY3LjY2LTMuMDUgMS40NS0xLjE3Yy44IDEuODggMS4zOCAzLjUgMS43NCA1LjYzYy4zNiAyLjE4LS4xNCA0LjgzLjQyIDUuMTFjLjkyLjQ2IDQuOTcuNDcgOC42My0xLjM2czYuODUtNS44MiA2Ljg1LTUuODJzLTIuMzUtNS45MS0xLjkyLTExLjczczIuMjUtOS4yNCAzLjEtOC41NGMuODQuNy0uMzggNS4zNS41MiAxMC44OWMuODkgNS41NCAyLjE2IDEwLjc1IDUuNzMgMTYuNjZjMy41OCA1LjkxIDQuODUgOC4xMiA1LjkzIDguNDQiLz48L3N2Zz4="/>
+        </svg>
+      </g>
+      <!-- 红领巾（小号） -->
+      <g transform="rotate(4 348 756)">
+        <rect x="304" y="748" width="92" height="20" rx="10" fill="#d4441c"/>
+        <path d="M342 764 L 368 764 L 356 790 Z" fill="#d4441c"/>
+      </g>
+
+      <!-- ===== 地面 ===== -->
+      <path d="M80 908 C 260 896, 460 912, 640 900 C 760 893, 850 906, 900 898" stroke="#1c1a17" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="250" cy="908" rx="96" ry="12" fill="#e5ddd0"/>
+      <ellipse cx="352" cy="912" rx="72" ry="10" fill="#e5ddd0"/>
+
+      <!-- ===== developer 的话 ===== -->
+      <text x="580" y="778" font-size="28" fill="#d4441c">「别慌，走这条。」</text>
+
+      <!-- ===== 角色标签 ===== -->
+      <text x="238" y="960" font-size="24" fill="#4a4238" text-anchor="middle">developer</text>
+      <text x="350" y="960" font-size="24" fill="#9a9286" text-anchor="middle">骆小普</text>
+    </svg>
+  </div>
+
+  <div class="foot">
+    <div class="sig"><span class="bar"></span>Khan驾到<span class="theme">怎样让人和 Agent 协作得更好？</span></div>
+    <div style="text-align:right"><div class="entag">HUMAN · IN · THE · LOOP</div><div style="font-size:15px;color:#c9bfae;margin-top:4px">骆小普形象基于 Google Noto Emoji</div></div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>骆小普的实习周报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1440px;}
+  body{
+    background-color:#faf7f2;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#231709; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05; mix-blend-mode:multiply;
+  }
+  .page{position:relative; padding:60px 72px 44px; height:1440px; display:flex; flex-direction:column;}
+
+  header{position:relative;}
+  .title{
+    font-family:"Ma Shan Zheng",cursive;
+    font-size:84px; line-height:1.05; color:#1c1a17; letter-spacing:0.04em;
+  }
+  .subtitle{
+    font-family:"SF Mono",Menlo,monospace; font-size:24px; color:#d4441c;
+    margin-top:10px; letter-spacing:0.04em;
+  }
+
+  /* 周报数据卡 */
+  .stats{
+    margin-top:34px; background:#f0ece4; border-radius:16px;
+    display:flex; padding:26px 16px 22px;
+  }
+  .stat{flex:1; text-align:center; position:relative;}
+  .stat + .stat::before{
+    content:""; position:absolute; left:0; top:14px; bottom:14px;
+    width:2px; background:#ddd4c4;
+  }
+  .stat .num{
+    font-family:"Ma Shan Zheng",cursive; font-size:76px; line-height:1;
+    color:#1c1a17;
+  }
+  .stat.hl .num{color:#d4441c;}
+  .stat .lbl{font-size:25px; color:#4a4238; margin-top:8px;}
+  .stat .sub{font-size:20px; color:#9a9286; margin-top:2px;}
+
+  .chart{flex:1; display:flex; align-items:center; margin-top:6px;}
+  .chart svg{width:100%; height:auto; display:block;}
+
+  .foot{margin-top:6px; display:flex; justify-content:space-between; align-items:center;}
+  .sig{display:flex; align-items:center; gap:14px; font-family:"Songti SC",serif; font-weight:700; font-size:26px;}
+  .sig .bar{width:26px;height:2px;background:#d4441c;display:inline-block;}
+  .sig .theme{font-family:"LXGW Bright","PingFang SC",sans-serif; font-weight:400; font-size:21px; color:#9a9286;}
+  .entag{font-size:20px; letter-spacing:0.32em; color:#9a9286;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="title">骆小普的实习周报</div>
+    <div class="subtitle">luo xiaopu · internship report · week 1</div>
+  </header>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="num">6</div>
+      <div class="lbl">接手的 bug</div>
+      <div class="sub">一张一张领回来</div>
+    </div>
+    <div class="stat hl">
+      <div class="num">1</div>
+      <div class="lbl">真正修好的</div>
+      <div class="sub">就一个，还得复查</div>
+    </div>
+    <div class="stat">
+      <div class="num" style="font-size:56px;padding-top:16px;">正正…</div>
+      <div class="lbl">意外状况</div>
+      <div class="sub">没数过来</div>
+    </div>
+  </div>
+
+  <div class="chart">
+    <svg viewBox="0 0 936 850" fill="none">
+
+      <!-- ===== 慌乱线：头顶放射短线 ===== -->
+      <g stroke="#d4441c" stroke-width="5" stroke-linecap="round">
+        <line x1="430" y1="96" x2="418" y2="58"/>
+        <line x1="480" y1="86" x2="482" y2="46"/>
+        <line x1="530" y1="98" x2="546" y2="62"/>
+      </g>
+      <text x="588" y="86" font-size="58" fill="#d4441c" font-family="Ma Shan Zheng,cursive" transform="rotate(12 588 86)">？！</text>
+
+      <!-- ===== 汗滴 ===== -->
+      <g stroke="#1c1a17" stroke-width="3.5" fill="#faf7f2" stroke-linejoin="round">
+        <path d="M356 168 C 348 184, 348 196, 356 202 C 364 196, 364 184, 356 168 Z"/>
+        <path d="M568 200 C 560 216, 560 228, 568 234 C 576 228, 576 216, 568 200 Z"/>
+        <path d="M330 232 C 324 244, 324 253, 330 258 C 336 253, 336 244, 330 232 Z"/>
+      </g>
+
+      <!-- ===== 骆小普：头歪 + 四肢乱舞 ===== -->
+      <!-- 身体先画（墨色线稿，站不稳后仰） -->
+      <g stroke="#1c1a17" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <!-- 上衣（后仰倾斜） -->
+        <g transform="rotate(-8 470 330)">
+          <path d="M420 300 C 408 302, 402 314, 401 326 L 396 402 C 395 414, 407 421, 420 421 L 508 421 C 521 421, 533 414, 532 402 L 527 326 C 526 314, 519 302, 508 302 Z" fill="#faf7f2"/>
+        </g>
+        <!-- 左臂：高高甩起 -->
+        <path d="M410 318 C 378 292, 352 264, 344 228"/>
+        <!-- 右臂：另一边乱挥（扳手要脱手） -->
+        <path d="M524 322 C 560 306, 590 282, 604 252"/>
+        <!-- 左腿：踉跄前伸 -->
+        <path d="M436 424 C 428 458, 408 480, 384 492 L 402 500"/>
+        <!-- 右腿：向后蹬空 -->
+        <path d="M502 424 C 516 456, 540 474, 568 480 L 562 496"/>
+      </g>
+
+      <!-- 羊驼头（歪着，Google Noto Emoji，镜像朝右） -->
+      <g transform="rotate(-14 470 210)">
+        <svg x="376" y="110" width="196" height="186" viewBox="88 8 40 38">
+          <g transform="translate(128 0) scale(-1 1)">
+            <image x="0" y="0" width="128" height="128" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHBhdGggZmlsbD0iIzk1NzE1NSIgZD0iTTk0LjgyIDUyLjM2czQuMzktNC4zMSA5LjQ4LTQuMTNjNS40NC4xOSA5LjQzIDMuMTQgMTAuNzUgNy42NWMxLjMxIDQuNSAxLjQ1IDYuMjQgMi40NCA3LjdjLjk5IDEuNDUgMi4yNSAyLjQ5IDIuMjUgMy4yOHMtLjk0IDEuODMtMi4yMSAyLjM1cy0zLjQ3LS4wOS0zLjQ3LS4wOXMtLjU2IDIuODItMi42MyAzLjQ3Yy0yLjA2LjY2LTMuOTQuNDItMy45NC40MmwtMi42My0xMC4xOHMxLjg0LTIuNzkuMzgtNC43NGMtMS45Ny0yLjYyLTUuNDYtLjE4LTUuNDYtLjE4ek02OC40MyA5My44MnMtLjc1IDUuMDItMS42OSA2LjY2cy0xLjM2IDEuOTctMS4zNiAxLjk3cy0uMDUgOC4yNi0uMDUgMTAuNTZjMCAxLjc5LjQ2IDQuNDEtLjU2IDUuMjFjLTEuMjcuOTktNi4yOSAxLjAzLTYuOTkgMHMxLjg4LTMuMzMgMS45Ny00LjA0Yy4wOS0uNy0uMjgtNy43LS4zMy05LjA2cy0yLjM2LTEwLjMtMi4zNi0xMC4zem0zMC4zNyA2LjcxYy4zOC41OS44OCA3LjIzLjk3IDkuMjlzLjA5IDUuNC0uMDUgNS45MWMtLjE0LjUyLTMuMjQgMy4wNS0yLjExIDMuOTlzNy4wOS4zOCA3LjU2LS40N2MuNDctLjg0LjQyLTE4LjExLjQyLTE5LjUyYzAtMS4wOC0xLjg0LTUuNS0yLjUxLTYuNWMtLjY1LS45OC00LjY1IDYuNzEtNC4yOCA3LjMiLz48cGF0aCBmaWxsPSIjREI3QzYwIiBkPSJNMjAuNjMgMTYuOXMtMS4xOS0xLjk0LTIuNS0zLjdjLTEuNTEtMi4wMi0zLjE3LTMuOC0zLjEtNC40N2MuMDgtLjc2IDEuMy0uNDkgMS4zLS40OWw0LjUgMy40NWwzLjY2IDUuMDd6bTMuOTgtMTEuNTFjLS4yNSAxLjA2IDEuOTYgMy42MSAzLjYzIDcuNzFjLjY4IDEuNjcgMS4yNyA2LjEyIDEuMjcgNi4xMmwyLjY3IDEuMjdzLTEuMDYtNi4wNS0yLjExLTguOHMtNC43OS05LjE4LTUuNDYtNi4zIi8+PHBhdGggZmlsbD0iI0ZGRDNCMiIgZD0iTTI0LjIyIDE1LjA3UzIxLjQgMTAgMTkuMTUgOC44MWMtMi4yNS0xLjItMy45NC0uNzQtMy43Ny0uMzJjLjMxLjc0IDMuMSAxLjkgNC40MyAzLjk0czMuNTUgNS41MyAzLjU1IDUuNTN6bS42NC0xMC4xM2MtLjA5LTEuNDEgNC4wMS4yOCA2LjM0IDMuNDVzMi44OSA1LjIxIDMuMDMgOC44cy0yLjYgMy40NS0yLjYgMy4yNHMtLjItNC40My0yLjA0LTkuMjJDMjguMzQgOCAyNC45MyA2LjA2IDI0Ljg2IDQuOTQiLz48cGF0aCBmaWxsPSIjRkZEM0IyIiBkPSJNMTkuNzkgMTkuNnMtMi41OCAxLjU1LTUuMDcgMi40OWMtMi4wMy43Ni02LjQ0IDIuMjgtNi4wOSA0LjI1Yy4xNC43OS0uODggMS43NS0uMzkgMy4yYy40MyAxLjI4IDEuMjUgMS4zOCAxLjU1IDEuNTVjLjQ5LjI4IDEuNTEgMi4yNSAzLjggMi40NWMyLjU3LjIyIDQuMDgtLjc1IDQuMDgtLjc1TDIzLjczIDM4bDguNTktOC4xMmwuNjEtOC45NmwtNi4xOS0yLjM1eiIvPjxwYXRoIGZpbGw9IiM3QjVCNTIiIGQ9Ik0xMS42OSAyOC41OXMyLjA0LTEuMjMgMi44OS0xLjY1Yy44NC0uNDIuNzctMi4xNS0uODQtMS41MWMtMS42Mi42My0yLjc4IDEuMzctMi43OCAxLjM3cy0xLjMtMS4wMi0xLjc2LTEuNDhzLTEuMzQuNTItLjQ2IDEuNjhjLjg4IDEuMTcgMS4yNiAxLjUyIDEuMjYgMS41MnMwIC43Ny0uMDQgMS4wNnMtMS45LTEuMjMtMS44Ny0uMjVjLjA0Ljk5LjI1IDEuNDggMS4zNCAxLjYyczEuNTUuMjEgMS41NS4yMXMxLjc2LjcgMy4zNC42N3MzLjgtMS44NyAzLjEzLTIuNTNjLS42Ny0uNjctMi4yOS43LTMuNzMuNjdjLTEuNDQtLjA0LTEuOS0uMjUtMS45LS4yNXoiLz48cGF0aCBmaWxsPSIjMkIyQTMyIiBkPSJNMjMuMTcgMjIuODVzMS4xNi0xLjIgMi40My0uNDljMS4yNy43Ljk5IDIuODItLjMyIDMuMTNjLTEuMjMuMy0yLjE1LS41Ni0yLjE1LS41NnMtMi41Ny4zNS0yLjQ2LS45OWMuMDktMS4xNiAyLjUtMS4wOSAyLjUtMS4wOSIvPjxwYXRoIGZpbGw9IiNBRTk1N0YiIGQ9Ik0yOC41MiAxMy45NXMtNC42NS0uMzEtNy42IDEuNjdzLTMuOTQgMy4yOC0zLjQzIDQuMThzMS44OC44OSAzLjYxLjc1YzEuNzQtLjE0IDMuNjYtLjM4IDUuNDktLjIzYzEuODMuMTQgMi45MS41NiAzLjU3Ljk0czEuNjQgMS4yMiAxLjY0IDEuMjJzLTEuOTIgMi42Mi0zLjQzIDQuOTdjLTEuNSAyLjM1LTIuMzkgMy44OS0zLjE5IDUuNzNjLS41OCAxLjM0LTEuMzYgMy4yNC0xLjM2IDMuMjRzLTIuMy0yLjE2LTIuODYtMi41M2MtLjU2LS4zOC0yLjU4LTEuNS0yLjU4LTEuNWwtLjk5LjYxcy0uMTQgMy45OSAxLjQ1IDguNDVzMy45OSA4LjMxIDMuOTkgOC4zMXMtLjQ3IDcuMDkgMy4zMyAxMy43YzIgMy40OSA2LjM4IDUuODcgNi4zOCA1Ljg3cy0uMjggNC43NCAyLjQ5IDcuODRzNS4xMiAzLjEgNS4xMiAzLjFzLjI4IDIuMTEgMS44OCA1LjQ5YzEuNjQgMy40NyAzLjcxIDQuNSAzLjcxIDQuNXMtLjU2IDMgLjM4IDcuOThjLjg1IDQuNDkgMy4zOCA2LjggMy4zOCA2LjhzLjMzIDEyLjA2IDAgMTIuODFzLTMuMSAzLjcxLTIuNTMgNC42OWMuNTYuOTkgMy4xIDEuMDggNC4zNiAxLjA4czMuMzMtLjQyIDMuODktLjk0cy43LTguNTkuNy0xMC4wOXMuMzMtNi45OS4zMy02Ljk5czMuNDctMS41NSA0LjY5LTQuMThzMS4wOC00Ljc0IDEuMDgtNC43NHM0LjE4LjUyIDkuMjktLjg5YzUuMTItMS40MSAxMC4yOC02LjA1IDEwLjI4LTYuMDVzMi44NiA1LjEyIDQuMjIgNy41MXMzLjg5IDUuNzcgMy44OSA1Ljc3cy4wNSAxMy42Ni0uMjMgMTQuMjJzLTMuNjYgNC41LTIuOTYgNS4yNmMuNy43NSAyLjQ0Ljg0IDQuMzYuOGMxLjkyLS4wNSAzLjg5LS4xNCA0LjI3LTEuMjdzMC0zLjYxLjA5LTUuNDlzLjQyLTEyLjA2LjQyLTEyLjA2czUuNDgtMy4wNiA3Ljk4LTkuNDNjMi4wNy01LjI4IDIuMDItMTAuNzkgMi4wMi0xMC43OXMxLjU1LTUuMDcgMS44My02Ljk1cy44NC01LjU4LTEuMzYtMTEuODdzLTcuMTgtMTMuNTYtMTQuNTktMTYuNjFzLTE0Ljg4LTMuMjQtMjEuMy0zLjE5Yy02LjQzLjA1LTE3LjY5IDEuNS0xOS41Mi45NHMtNS40LTUuNzctNi43Ni0xMS4yMmMtMS4zNi01LjQ0LTMtMTEuMzYtNS4zLTE0LjEycy00LjQxLTMuNjYtNC40MS0zLjY2cy0xLjEzIDMuNDMtMy4yNCAxLjk3Yy0xLjY4LTEuMTYtMS43OC0yLjU1LTEuOTItMy40OGMtLjE0LS45OS0uNTYtMi4xMi0uNTYtMi4xMiIvPjxwYXRoIGZpbGw9IiNGOEY5RkMiIGQ9Ik05My4zIDEwMS4zMmMuOTEuMjggMy43MS0xLjQ1IDQuOTctMi42M2MxLjU1LTEuNDQgMi4zOS0zLjk0IDIuMjUtNC43OWMtLjE0LS44NC0yLjIxIDEuNjktMi44Mi44czIuMjYtMi45OCAzLjI4LTQuNjVjMS40LTIuMjggMS43OS00LjE5IDEuMTgtNC41NnMtMi44NiAyLjY4LTMuNTMgMS42NWMtLjgzLTEuMjcuNjctMi40NyAyLjIzLTMuODRjMS40NC0xLjI3IDMuMDMtMi4zNiAzLjc4LTYuMDJzLjQ5LTkuMDMtLjgyLTEyLjA0Yy0xLjMxLTMtNS4zMy05LjMxLTEyLjgzLTEzLjY4Yy03LjUxLTQuMzYtMTguOTYtMy44NS0yMy41Ni0zLjcxcy0xNS45NiAyLjE2LTE3LjgzIDEuMjJjLTEuODgtLjk0LTUuMjYtMy03LjQxLTEwLjA5Yy0yLjE2LTcuMDktMi4wNi0xMC43Ny00LjMyLTE0LjVjLTEuMTMtMS44Ny0yLjkzLTMuMDctMi45My0zLjA3cy0yLjUxIDQuNTMtNC4xNSA3LjA2cy00LjQ2IDcuMjctNS40IDE0LjA4Yy0uOTQgNi44LjM5IDEyLjc1Ljk2IDE1LjIzYzEuMTggNS4xNiA1LjggOC4xOSA1LjggOC4xOXMuODQtMy4zNCAxLjA4LTQuMzZjLjM1LTEuNSAxLjEzLTMuMzggMi4xNi0yLjcycy0xIDguOTMtLjI2IDEyLjkzYy45NCA1LjA5IDUuMDQgNS4yMyA1LjA0IDUuMjNzLjM4LTIuNTggMS4zMS0zLjc1Yy45NC0xLjE3IDEuNDEtMS4yMiAxLjc4LS43NWMuMzguNDctLjgyIDQuMjgtLjE5IDguMTJjLjkyIDUuNTYgNC42MSA4LjQ3IDQuODkgOS4wOHMtMS4wOSAxMy40OCA2LjA0IDEzLjU5YzYuMTUuMDkgNC44OC02LjY2IDQuODgtNi42NnMyLjQ5LS44OSAzLTQuNDZzLS41Mi03LjY3LTEuMDMtOS4wMWMtMS4wMy0yLjY3LjY2LTMuMDUgMS40NS0xLjE3Yy44IDEuODggMS4zOCAzLjUgMS43NCA1LjYzYy4zNiAyLjE4LS4xNCA0LjgzLjQyIDUuMTFjLjkyLjQ2IDQuOTcuNDcgOC42My0xLjM2czYuODUtNS44MiA2Ljg1LTUuODJzLTIuMzUtNS45MS0xLjkyLTExLjczczIuMjUtOS4yNCAzLjEtOC41NGMuODQuNy0uMzggNS4zNS41MiAxMC44OWMuODkgNS41NCAyLjE2IDEwLjc1IDUuNzMgMTYuNjZjMy41OCA1LjkxIDQuODUgOC4xMiA1LjkzIDguNDQiLz48L3N2Zz4="/>
+          </g>
+        </svg>
+      </g>
+      <!-- 红领巾（遮住头身接缝，跟着身体倾斜） -->
+      <g transform="rotate(-8 470 300)">
+        <rect x="404" y="284" width="132" height="26" rx="13" fill="#d4441c"/>
+        <path d="M460 306 L 494 306 L 478 340 Z" fill="#d4441c"/>
+      </g>
+
+      <!-- ===== 脱手的扳手（右上，翻转飞出去） ===== -->
+      <g transform="rotate(38 664 208)" stroke="#1c1a17" stroke-width="4" stroke-linecap="round" fill="#faf7f2">
+        <path d="M640 200 L 692 200" stroke-width="9"/>
+        <path d="M632 186 a 14 14 0 1 0 4 26"/>
+        <path d="M700 186 a 14 14 0 1 1 -4 26"/>
+      </g>
+      <g stroke="#9a9286" stroke-width="3" stroke-linecap="round">
+        <path d="M618 244 q 10 -8 22 -6"/>
+        <path d="M610 262 q 14 -10 30 -8"/>
+      </g>
+
+      <!-- ===== 纷飞的 bug 工单 ===== -->
+      <!-- 工单1：左上，翘角 -->
+      <g transform="rotate(-18 168 150)">
+        <rect x="110" y="110" width="126" height="84" rx="8" stroke="#1c1a17" stroke-width="3.5" fill="#faf7f2"/>
+        <line x1="126" y1="136" x2="204" y2="136" stroke="#9a9286" stroke-width="3"/>
+        <line x1="126" y1="158" x2="188" y2="158" stroke="#9a9286" stroke-width="3"/>
+        <text x="126" y="186" font-size="22" fill="#d4441c">BUG-4</text>
+      </g>
+      <!-- 工单2：右侧，斜飞 -->
+      <g transform="rotate(22 796 330)">
+        <rect x="730" y="290" width="126" height="84" rx="8" stroke="#1c1a17" stroke-width="3.5" fill="#faf7f2"/>
+        <line x1="746" y1="316" x2="824" y2="316" stroke="#9a9286" stroke-width="3"/>
+        <line x1="746" y1="338" x2="808" y2="338" stroke="#9a9286" stroke-width="3"/>
+        <text x="746" y="366" font-size="22" fill="#d4441c">BUG-5</text>
+      </g>
+      <!-- 工单3：左下，掉地上 -->
+      <g transform="rotate(9 190 560)">
+        <rect x="128" y="520" width="126" height="84" rx="8" stroke="#1c1a17" stroke-width="3.5" fill="#faf7f2"/>
+        <line x1="144" y1="546" x2="222" y2="546" stroke="#9a9286" stroke-width="3"/>
+        <line x1="144" y1="568" x2="206" y2="568" stroke="#9a9286" stroke-width="3"/>
+        <text x="144" y="596" font-size="22" fill="#d4441c">BUG-2</text>
+      </g>
+      <!-- 小虫子从工单里爬出来（左下工单旁） -->
+      <g stroke="#1c1a17" stroke-width="3.5" fill="#faf7f2" stroke-linecap="round">
+        <ellipse cx="296" cy="618" rx="17" ry="13"/>
+        <line x1="284" y1="606" x2="278" y2="598"/>
+        <line x1="306" y1="605" x2="312" y2="597"/>
+        <line x1="282" y1="626" x2="272" y2="632"/>
+        <line x1="310" y1="626" x2="320" y2="632"/>
+      </g>
+
+      <!-- ===== 慌乱台词 ===== -->
+      <text x="96" y="330" font-size="27" fill="#d4441c" transform="rotate(-6 96 330)">「改哪儿？」</text>
+      <text x="620" y="430" font-size="27" fill="#d4441c" transform="rotate(5 620 430)">「这算修好了吗？」</text>
+      <text x="368" y="590" font-size="27" fill="#d4441c">「怎么又冒出来一个……」</text>
+
+      <!-- ===== 地面（歪的，站不稳） ===== -->
+      <path d="M60 700 C 240 688, 430 706, 620 694 C 740 687, 830 700, 890 692" stroke="#1c1a17" stroke-width="4" stroke-linecap="round" stroke-dasharray="14 12"/>
+      <!-- 踉跄的影子 -->
+      <ellipse cx="474" cy="700" rx="150" ry="14" fill="#e5ddd0"/>
+
+      <!-- ===== 导师评语 ===== -->
+      <text x="70" y="778" font-size="25" fill="#9a9286">导师评语：</text>
+      <text x="200" y="778" font-size="27" fill="#4a4238">没人带的时候，像个孩子一样无助。</text>
+
+      <!-- ===== 大红印章：手忙脚乱 ===== -->
+      <g transform="rotate(-12 764 736)">
+        <rect x="666" y="682" width="196" height="108" rx="12" stroke="#d4441c" stroke-width="6" fill="none" opacity="0.85"/>
+        <text x="764" y="758" font-size="62" fill="#d4441c" font-family="Ma Shan Zheng,cursive" text-anchor="middle" opacity="0.85">手忙脚乱</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="foot">
+    <div class="sig"><span class="bar"></span>Khan驾到<span class="theme">怎样让人和 Agent 协作得更好？</span></div>
+    <div style="text-align:right"><div class="entag">WEEK · ONE</div><div style="font-size:15px;color:#c9bfae;margin-top:4px">骆小普形象基于 Google Noto Emoji</div></div>
+  </div>
+
+</div>
+</body>
+</html>
