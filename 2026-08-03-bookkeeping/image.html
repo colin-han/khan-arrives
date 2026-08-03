@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>骆小普的账本</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1440px;}
+  body{
+    background-color:#faf7f2;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#231709; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05; mix-blend-mode:multiply;
+  }
+  .page{position:relative; padding:60px 72px 44px; height:1440px; display:flex; flex-direction:column;}
+
+  header{position:relative;}
+  .title{
+    font-family:"Ma Shan Zheng",cursive;
+    font-size:84px; line-height:1.05; color:#1c1a17; letter-spacing:0.04em;
+  }
+  .subtitle{
+    font-family:"SF Mono",Menlo,monospace; font-size:24px; color:#d4441c;
+    margin-top:10px; letter-spacing:0.04em;
+  }
+
+  .chart{flex:1; display:flex; align-items:center; margin-top:10px;}
+  .chart svg{width:100%; height:auto; display:block;}
+
+  .foot{margin-top:14px; display:flex; justify-content:space-between; align-items:center;}
+  .sig{display:flex; align-items:center; gap:14px; font-family:"Songti SC",serif; font-weight:700; font-size:26px;}
+  .sig .bar{width:26px;height:2px;background:#d4441c;display:inline-block;}
+  .sig .theme{font-family:"LXGW Bright","PingFang SC",sans-serif; font-weight:400; font-size:21px; color:#9a9286;}
+  .entag{font-size:20px; letter-spacing:0.32em; color:#9a9286;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="title">骆小普的账本</div>
+    <div class="subtitle">luo xiaopu · bookkeeping · cost baseline</div>
+  </header>
+
+  <div class="chart">
+    <svg viewBox="0 0 936 900" fill="none">
+
+      <!-- ===== 便签：大环境不好，省着点花 ===== -->
+      <g transform="rotate(-6 176 120)">
+        <rect x="56" y="56" width="240" height="128" rx="6" fill="#f0ece4"/>
+        <rect x="136" y="42" width="80" height="26" rx="4" fill="#e5ddd0" opacity="0.9"/>
+        <text x="176" y="112" font-size="27" fill="#4a4238" text-anchor="middle">大环境不好</text>
+        <text x="176" y="152" font-size="27" fill="#4a4238" text-anchor="middle">省着点花</text>
+      </g>
+
+      <!-- ===== 账本（立在桌上） ===== -->
+      <g transform="rotate(1 685 340)">
+        <rect x="470" y="56" width="430" height="604" rx="10" stroke="#1c1a17" stroke-width="4.5" fill="#faf7f2"/>
+        <!-- 左侧装订线 -->
+        <line x1="502" y1="70" x2="502" y2="646" stroke="#9a9286" stroke-width="2.5" stroke-dasharray="2 10"/>
+        <circle cx="502" cy="120" r="5" fill="#9a9286"/>
+        <circle cx="502" cy="340" r="5" fill="#9a9286"/>
+        <circle cx="502" cy="560" r="5" fill="#9a9286"/>
+
+        <!-- 账本抬头 -->
+        <text x="700" y="122" font-size="36" fill="#1c1a17" text-anchor="middle" font-family="Songti SC,serif" font-weight="700">支 出 明 细</text>
+        <line x1="540" y1="142" x2="860" y2="142" stroke="#1c1a17" stroke-width="2.5"/>
+        <line x1="540" y1="148" x2="860" y2="148" stroke="#1c1a17" stroke-width="1.5"/>
+
+        <!-- 第 1 笔：主循环（大头） -->
+        <text x="524" y="216" font-size="31" fill="#1c1a17">主循环</text>
+        <rect x="646" y="190" width="212" height="32" rx="6" fill="#d4441c"/>
+        <text x="852" y="214" font-size="27" fill="#faf7f2" text-anchor="end" font-family="SF Mono,Menlo,monospace">90%+</text>
+        <text x="524" y="268" font-size="21" fill="#9a9286">＝琢磨「下一步干啥」的那个脑子</text>
+        <text x="618" y="304" font-size="27" fill="#d4441c" transform="rotate(-2 618 304)" font-family="Ma Shan Zheng,cursive">钱原来都花在这儿！</text>
+        <!-- 红笔圈 -->
+        <ellipse cx="688" cy="206" rx="180" ry="36" stroke="#d4441c" stroke-width="4" transform="rotate(-2 688 206)" stroke-dasharray="230 14" stroke-linecap="round"/>
+
+        <!-- 第 2-5 笔：小头 -->
+        <text x="524" y="356" font-size="29" fill="#4a4238">复现问题</text>
+        <rect x="646" y="334" width="26" height="26" rx="5" fill="#4a4238"/>
+        <text x="524" y="424" font-size="29" fill="#4a4238">调查</text>
+        <rect x="646" y="402" width="20" height="26" rx="5" fill="#4a4238"/>
+        <text x="524" y="492" font-size="29" fill="#4a4238">修复</text>
+        <rect x="646" y="470" width="16" height="26" rx="5" fill="#4a4238"/>
+        <text x="524" y="560" font-size="29" fill="#4a4238">测试</text>
+        <rect x="646" y="538" width="12" height="26" rx="5" fill="#4a4238"/>
+
+        <!-- 大括号：四项加起来不到 10% -->
+        <path d="M712 332 C 726 336, 726 356, 726 380 C 726 420, 726 430, 740 440 C 726 450, 726 460, 726 500 C 726 524, 726 544, 712 548"
+              stroke="#9a9286" stroke-width="3" stroke-linecap="round"/>
+        <text x="762" y="428" font-size="25" fill="#9a9286">四项加起来</text>
+        <text x="762" y="464" font-size="25" fill="#9a9286">不到 10%</text>
+
+        <!-- 账本脚注：小字露出 OpenTelemetry -->
+        <text x="686" y="636" font-size="19" fill="#c9bfae" text-anchor="middle" font-family="SF Mono,Menlo,monospace" letter-spacing="1">· powered by OpenTelemetry ·</text>
+      </g>
+
+      <!-- ===== 骆小普：伏案记账 ===== -->
+      <!-- 台词 -->
+      <text x="308" y="248" font-size="28" fill="#d4441c" transform="rotate(-4 308 248)" font-family="Ma Shan Zheng,cursive">「吓一跳……」</text>
+      <!-- 汗滴 -->
+      <g stroke="#1c1a17" stroke-width="3.5" fill="#faf7f2" stroke-linejoin="round">
+        <path d="M112 258 C 104 274, 104 286, 112 292 C 120 286, 120 274, 112 258 Z"/>
+      </g>
+
+      <!-- 身体（坐在桌后） -->
+      <g stroke="#1c1a17" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M192 398 C 178 400, 170 412, 169 424 L 163 648 C 162 662, 176 670, 191 670 L 305 670 C 320 670, 334 662, 333 648 L 327 424 C 326 412, 317 400, 304 400 Z" fill="#faf7f2"/>
+        <!-- 右臂：伸向账本，握着笔 -->
+        <path d="M326 430 C 380 460, 420 510, 450 560"/>
+      </g>
+      <!-- 笔（正落在账本上） -->
+      <g stroke="#1c1a17" stroke-width="4" stroke-linecap="round">
+        <line x1="450" y1="560" x2="506" y2="584"/>
+        <line x1="506" y1="584" x2="518" y2="590" stroke-width="6"/>
+      </g>
+
+      <!-- 羊驼头（镜像朝右，看着账本） -->
+      <g transform="rotate(6 262 300)">
+        <svg x="140" y="205" width="196" height="186" viewBox="88 8 40 38">
+          <g transform="translate(128 0) scale(-1 1)">
+            <image x="0" y="0" width="128" height="128" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHBhdGggZmlsbD0iIzk1NzE1NSIgZD0iTTk0LjgyIDUyLjM2czQuMzktNC4zMSA5LjQ4LTQuMTNjNS40NC4xOSA5LjQzIDMuMTQgMTAuNzUgNy42NWMxLjMxIDQuNSAxLjQ1IDYuMjQgMi40NCA3LjdjLjk5IDEuNDUgMi4yNSAyLjQ5IDIuMjUgMy4yOHMtLjk0IDEuODMtMi4yMSAyLjM1cy0zLjQ3LS4wOS0zLjQ3LS4wOXMtLjU2IDIuODItMi42MyAzLjQ3Yy0yLjA2LjY2LTMuOTQuNDItMy45NC40MmwtMi42My0xMC4xOHMxLjg0LTIuNzkuMzgtNC43NGMtMS45Ny0yLjYyLTUuNDYtLjE4LTUuNDYtLjE4ek02OC40MyA5My44MnMtLjc1IDUuMDItMS42OSA2LjY2cy0xLjM2IDEuOTctMS4zNiAxLjk3cy0uMDUgOC4yNi0uMDUgMTAuNTZjMCAxLjc5LjQ2IDQuNDEtLjU2IDUuMjFjLTEuMjcuOTktNi4yOSAxLjAzLTYuOTkgMHMxLjg4LTMuMzMgMS45Ny00LjA0Yy4wOS0uNy0uMjgtNy43LS4zMy05LjA2cy0yLjM2LTEwLjMtMi4zNi0xMC4zem0zMC4zNyA2LjcxYy4zOC41OS44OCA3LjIzLjk3IDkuMjlzLjA5IDUuNC0uMDUgNS45MWMtLjE0LjUyLTMuMjQgMy4wNS0yLjExIDMuOTlzNy4wOS4zOCA3LjU2LS40N2MuNDctLjg0LjQyLTE4LjExLjQyLTE5LjUyYzAtMS4wOC0xLjg0LTUuNS0yLjUxLTYuNWMtLjY1LS45OC00LjY1IDYuNzEtNC4yOCA3LjMiLz48cGF0aCBmaWxsPSIjREI3QzYwIiBkPSJNMjAuNjMgMTYuOXMtMS4xOS0xLjk0LTIuNS0zLjdjLTEuNTEtMi4wMi0zLjE3LTMuOC0zLjEtNC40N2MuMDgtLjc2IDEuMy0uNDkgMS4zLS40OWw0LjUgMy40NWwzLjY2IDUuMDd6bTMuOTgtMTEuNTFjLS4yNSAxLjA2IDEuOTYgMy42MSAzLjYzIDcuNzFjLjY4IDEuNjcgMS4yNyA2LjEyIDEuMjcgNi4xMmwyLjY3IDEuMjdzLTEuMDYtNi4wNS0yLjExLTguOHMtNC43OS05LjE4LTUuNDYtNi4zIi8+PHBhdGggZmlsbD0iI0ZGRDNCMiIgZD0iTTI0LjIyIDE1LjA3UzIxLjQgMTAgMTkuMTUgOC44MWMtMi4yNS0xLjItMy45NC0uNzQtMy43Ny0uMzJjLjMxLjc0IDMuMSAxLjkgNC40MyAzLjk0czMuNTUgNS41MyAzLjU1IDUuNTN6bS42NC0xMC4xM2MtLjA5LTEuNDEgNC4wMS4yOCA2LjM0IDMuNDVzMi44OSA1LjIxIDMuMDMgOC44cy0yLjYgMy40NS0yLjYgMy4yNHMtLjItNC40My0yLjA0LTkuMjJDMjguMzQgOCAyNC45MyA2LjA2IDI0Ljg2IDQuOTQiLz48cGF0aCBmaWxsPSIjRkZEM0IyIiBkPSJNMTkuNzkgMTkuNnMtMi41OCAxLjU1LTUuMDcgMi40OWMtMi4wMy43Ni02LjQ0IDIuMjgtNi4wOSA0LjI1Yy4xNC43OS0uODggMS43NS0uMzkgMy4yYy40MyAxLjI4IDEuMjUgMS4zOCAxLjU1IDEuNTVjLjQ5LjI4IDEuNTEgMi4yNSAzLjggMi40NWMyLjU3LjIyIDQuMDgtLjc1IDQuMDgtLjc1TDIzLjczIDM4bDguNTktOC4xMmwuNjEtOC45NmwtNi4xOS0yLjM1eiIvPjxwYXRoIGZpbGw9IiM3QjVCNTIiIGQ9Ik0xMS42OSAyOC41OXMyLjA0LTEuMjMgMi44OS0xLjY1Yy44NC0uNDIuNzctMi4xNS0uODQtMS41MWMtMS42Mi42My0yLjc4IDEuMzctMi43OCAxLjM3cy0xLjMtMS4wMi0xLjc2LTEuNDhzLTEuMzQuNTItLjQ2IDEuNjhjLjg4IDEuMTcgMS4yNiAxLjUyIDEuMjYgMS41MnMwIC43Ny0uMDQgMS4wNnMtMS45LTEuMjMtMS44Ny0uMjVjLjA0Ljk5LjI1IDEuNDggMS4zNCAxLjYyczEuNTUuMjEgMS41NS4yMXMxLjc2LjcgMy4zNC42N3MzLjgtMS44NyAzLjEzLTIuNTNjLS42Ny0uNjctMi4yOS43LTMuNzMuNjdjLTEuNDQtLjA0LTEuOS0uMjUtMS45LS4yNXoiLz48cGF0aCBmaWxsPSIjMkIyQTMyIiBkPSJNMjMuMTcgMjIuODVzMS4xNi0xLjIgMi40My0uNDljMS4yNy43Ljk5IDIuODItLjMyIDMuMTNjLTEuMjMuMy0yLjE1LS41Ni0yLjE1LS41NnMtMi41Ny4zNS0yLjQ2LS45OWMuMDktMS4xNiAyLjUtMS4wOSAyLjUtMS4wOSIvPjxwYXRoIGZpbGw9IiNBRTk1N0YiIGQ9Ik0yOC41MiAxMy45NXMtNC42NS0uMzEtNy42IDEuNjdzLTMuOTQgMy4yOC0zLjQzIDQuMThzMS44OC44OSAzLjYxLjc1YzEuNzQtLjE0IDMuNjYtLjM4IDUuNDktLjIzYzEuODMuMTQgMi45MS41NiAzLjU3Ljk0czEuNjQgMS4yMiAxLjY0IDEuMjJzLTEuOTIgMi42Mi0zLjQzIDQuOTdjLTEuNSAyLjM1LTIuMzkgMy44OS0zLjE5IDUuNzNjLS41OCAxLjM0LTEuMzYgMy4yNC0xLjM2IDMuMjRzLTIuMy0yLjE2LTIuODYtMi41M2MtLjU2LS4zOC0yLjU4LTEuNS0yLjU4LTEuNWwtLjk5LjYxcy0uMTQgMy45OSAxLjQ1IDguNDVzMy45OSA4LjMxIDMuOTkgOC4zMXMtLjQ3IDcuMDkgMy4zMyAxMy43YzIgMy40OSA2LjM4IDUuODcgNi4zOCA1Ljg3cy0uMjggNC43NCAyLjQ5IDcuODRzNS4xMiAzLjEgNS4xMiAzLjFzLjI4IDIuMTEgMS44OCA1LjQ5YzEuNjQgMy40NyAzLjcxIDQuNSAzLjcxIDQuNXMtLjU2IDMgLjM4IDcuOThjLjg1IDQuNDkgMy4zOCA2LjggMy4zOCA2LjhzLjMzIDEyLjA2IDAgMTIuODFzLTMuMSAzLjcxLTIuNTMgNC42OWMuNTYuOTkgMy4xIDEuMDggNC4zNiAxLjA4czMuMzMtLjQyIDMuODktLjk0cy43LTguNTkuNy0xMC4wOXMuMzMtNi45OS4zMy02Ljk5czMuNDctMS41NSA0LjY5LTQuMThzMS4wOC00Ljc0IDEuMDgtNC43NHM0LjE4LjUyIDkuMjktLjg5YzUuMTItMS40MSAxMC4yOC02LjA1IDEwLjI4LTYuMDVzMi44NiA1LjEyIDQuMjIgNy41MXMzLjg5IDUuNzcgMy44OSA1Ljc3cy4wNSAxMy42Ni0uMjMgMTQuMjJzLTMuNjYgNC41LTIuOTYgNS4yNmMuNy43NSAyLjQ0Ljg0IDQuMzYuOGMxLjkyLS4wNSAzLjg5LS4xNCA0LjI3LTEuMjdzMC0zLjYxLjA5LTUuNDlzLjQyLTEyLjA2LjQyLTEyLjA2czUuNDgtMy4wNiA3Ljk4LTkuNDNjMi4wNy01LjI4IDIuMDItMTAuNzkgMi4wMi0xMC43OXMxLjU1LTUuMDcgMS44My02Ljk1cy44NC01LjU4LTEuMzYtMTEuODdzLTcuMTgtMTMuNTYtMTQuNTktMTYuNjFzLTE0Ljg4LTMuMjQtMjEuMy0zLjE5Yy02LjQzLjA1LTE3LjY5IDEuNS0xOS41Mi45NHMtNS40LTUuNzctNi43Ni0xMS4yMmMtMS4zNi01LjQ0LTMtMTEuMzYtNS4zLTE0LjEycy00LjQxLTMuNjYtNC40MS0zLjY2cy0xLjEzIDMuNDMtMy4yNCAxLjk3Yy0xLjY4LTEuMTYtMS43OC0yLjU1LTEuOTItMy40OGMtLjE0LS45OS0uNTYtMi4xMi0uNTYtMi4xMiIvPjxwYXRoIGZpbGw9IiNGOEY5RkMiIGQ9Ik05My4zIDEwMS4zMmMuOTEuMjggMy43MS0xLjQ1IDQuOTctMi42M2MxLjU1LTEuNDQgMi4zOS0zLjk0IDIuMjUtNC43OWMtLjE0LS44NC0yLjIxIDEuNjktMi44Mi44czIuMjYtMi45OCAzLjI4LTQuNjVjMS40LTIuMjggMS43OS00LjE5IDEuMTgtNC41NnMtMi44NiAyLjY4LTMuNTMgMS42NWMtLjgzLTEuMjcuNjctMi40NyAyLjIzLTMuODRjMS40NC0xLjI3IDMuMDMtMi4zNiAzLjc4LTYuMDJzLjQ5LTkuMDMtLjgyLTEyLjA0Yy0xLjMxLTMtNS4zMy05LjMxLTEyLjgzLTEzLjY4Yy03LjUxLTQuMzYtMTguOTYtMy44NS0yMy41Ni0zLjcxcy0xNS45NiAyLjE2LTE3LjgzIDEuMjJjLTEuODgtLjk0LTUuMjYtMy03LjQxLTEwLjA5Yy0yLjE2LTcuMDktMi4wNi0xMC43Ny00LjMyLTE0LjVjLTEuMTMtMS44Ny0yLjkzLTMuMDctMi45My0zLjA3cy0yLjUxIDQuNTMtNC4xNSA3LjA2cy00LjQ2IDcuMjctNS40IDE0LjA4Yy0uOTQgNi44LjM5IDEyLjc1Ljk2IDE1LjIzYzEuMTggNS4xNiA1LjggOC4xOSA1LjggOC4xOXMuODQtMy4zNCAxLjA4LTQuMzZjLjM1LTEuNSAxLjEzLTMuMzggMi4xNi0yLjcycy0xIDguOTMtLjI2IDEyLjkzYy45NCA1LjA5IDUuMDQgNS4yMyA1LjA0IDUuMjNzLjM4LTIuNTggMS4zMS0zLjc1Yy45NC0xLjE3IDEuNDEtMS4yMiAxLjc4LS43NWMuMzguNDctLjgyIDQuMjgtLjE5IDguMTJjLjkyIDUuNTYgNC42MSA4LjQ3IDQuODkgOS4wOHMtMS4wOSAxMy40OCA2LjA0IDEzLjU5YzYuMTUuMDkgNC44OC02LjY2IDQuODgtNi42NnMyLjQ5LS44OSAzLTQuNDZzLS41Mi03LjY3LTEuMDMtOS4wMWMtMS4wMy0yLjY3LjY2LTMuMDUgMS40NS0xLjE3Yy44IDEuODggMS4zOCAzLjUgMS43NCA1LjYzYy4zNiAyLjE4LS4xNCA0LjgzLjQyIDUuMTFjLjkyLjQ2IDQuOTcuNDcgOC42My0xLjM2czYuODUtNS44MiA2Ljg1LTUuODJzLTIuMzUtNS45MS0xLjkyLTExLjczczIuMjUtOS4yNCAzLjEtOC41NGMuODQuNy0uMzggNS4zNS41MiAxMC44OWMuODkgNS41NCAyLjE2IDEwLjc1IDUuNzMgMTYuNjZjMy41OCA1LjkxIDQuODUgOC4xMiA1LjkzIDguNDQiLz48L3N2Zz4="/>
+          </g>
+        </svg>
+      </g>
+      <!-- 老花镜（架在眼睛上，低低的） -->
+      <g transform="rotate(6 262 300)" stroke="#1c1a17" stroke-width="3.5" fill="none">
+        <circle cx="226" cy="297" r="27"/>
+        <path d="M199 291 L 162 275"/>
+        <path d="M253 301 q 16 4 28 0"/>
+      </g>
+      <!-- 红领巾（遮住头身接缝） -->
+      <g transform="rotate(3 248 386)">
+        <rect x="182" y="374" width="132" height="26" rx="13" fill="#d4441c"/>
+        <path d="M236 396 L 270 396 L 254 430 Z" fill="#d4441c"/>
+      </g>
+
+      <!-- ===== 算盘（桌上） ===== -->
+      <g stroke="#1c1a17" stroke-width="3.5">
+        <rect x="356" y="596" width="150" height="64" rx="8" fill="#faf7f2"/>
+        <line x1="356" y1="618" x2="506" y2="618" stroke-width="2.5"/>
+        <line x1="382" y1="598" x2="382" y2="658" stroke-width="2"/>
+        <line x1="418" y1="598" x2="418" y2="658" stroke-width="2"/>
+        <line x1="454" y1="598" x2="454" y2="658" stroke-width="2"/>
+        <line x1="490" y1="598" x2="490" y2="658" stroke-width="2"/>
+      </g>
+      <g fill="#4a4238">
+        <circle cx="382" cy="608" r="7"/>
+        <circle cx="454" cy="608" r="7"/>
+        <circle cx="382" cy="632" r="7"/>
+        <circle cx="382" cy="648" r="7"/>
+        <circle cx="418" cy="640" r="7"/>
+        <circle cx="454" cy="648" r="7"/>
+        <circle cx="490" cy="632" r="7"/>
+      </g>
+
+      <!-- ===== 书桌 ===== -->
+      <line x1="40" y1="660" x2="900" y2="660" stroke="#1c1a17" stroke-width="4.5" stroke-linecap="round"/>
+      <rect x="46" y="662" width="848" height="20" fill="#e5ddd0"/>
+      <g stroke="#1c1a17" stroke-width="4" stroke-linecap="round">
+        <line x1="130" y1="682" x2="122" y2="800"/>
+        <line x1="820" y1="682" x2="828" y2="800"/>
+      </g>
+
+      <!-- ===== 存钱罐：省下的（还没有） ===== -->
+      <g stroke="#1c1a17" stroke-width="3.5" fill="#faf7f2" stroke-linejoin="round">
+        <path d="M210 728 C 196 742, 190 764, 194 786 C 198 806, 220 818, 248 818 C 276 818, 298 806, 302 786 C 306 764, 300 742, 286 728 C 292 722, 294 716, 292 712 L 204 712 C 202 716, 204 722, 210 728 Z"/>
+        <line x1="232" y1="712" x2="264" y2="712" stroke-width="5"/>
+      </g>
+      <circle cx="248" cy="794" r="15" fill="#e8c063" stroke="#1c1a17" stroke-width="2.5"/>
+      <text x="248" y="856" font-size="23" fill="#9a9286" text-anchor="middle">省下的：还没有</text>
+
+      <!-- ===== 大红印章：精打细算 ===== -->
+      <g transform="rotate(-10 700 762)">
+        <rect x="602" y="708" width="196" height="108" rx="12" stroke="#d4441c" stroke-width="6" fill="none" opacity="0.85"/>
+        <text x="700" y="784" font-size="62" fill="#d4441c" font-family="Ma Shan Zheng,cursive" text-anchor="middle" opacity="0.85">精打细算</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="foot">
+    <div class="sig"><span class="bar"></span>Khan驾到<span class="theme">怎样让人和 Agent 协作得更好？</span></div>
+    <div style="text-align:right"><div class="entag">COST · BASELINE</div><div style="font-size:15px;color:#c9bfae;margin-top:4px">骆小普形象基于 Google Noto Emoji</div></div>
+  </div>
+
+</div>
+</body>
+</html>
