@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>看不见 token，就数行为</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1440px;}
+  body{
+    background-color:#faf7f2;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#231709; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05; mix-blend-mode:multiply;
+  }
+  .page{position:relative; padding:60px 72px 44px; height:1440px; display:flex; flex-direction:column;}
+  header{position:relative;}
+  .title{font-family:"Ma Shan Zheng",cursive; font-size:82px; line-height:1.05; color:#1c1a17; letter-spacing:0.03em;}
+  .subtitle{font-family:"SF Mono",Menlo,monospace; font-size:24px; color:#d4441c; margin-top:10px; letter-spacing:0.04em;}
+  .chart{flex:1; display:flex; align-items:center; margin-top:8px;}
+  .chart svg{width:100%; height:auto; display:block;}
+  .foot{margin-top:14px; display:flex; justify-content:space-between; align-items:center;}
+  .sig{display:flex; align-items:center; gap:14px; font-family:"Songti SC",serif; font-weight:700; font-size:26px;}
+  .sig .bar{width:26px;height:2px;background:#d4441c;display:inline-block;}
+  .sig .theme{font-family:"LXGW Bright","PingFang SC",sans-serif; font-weight:400; font-size:21px; color:#9a9286;}
+  .entag{font-size:20px; letter-spacing:0.32em; color:#9a9286;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="title">看不见 token，就数行为</div>
+    <div class="subtitle">agent has no token gauge / count what you can see</div>
+  </header>
+
+  <div class="chart">
+    <svg viewBox="0 0 936 1000" fill="none">
+
+      <text x="40" y="60" font-size="25" fill="#4a4238">agent 感觉不到自己的上下文在变肥——</text>
+      <text x="40" y="96" font-size="25" fill="#4a4238">所以给它配一根体温计，数得清的行为当刻度：</text>
+
+      <!-- ================= 体温计 ================= -->
+      <g>
+        <!-- 管子 -->
+        <rect x="128" y="170" width="44" height="640" rx="22" fill="#fffdf8" stroke="#1c1a17" stroke-width="5"/>
+        <!-- 球泡 -->
+        <circle cx="150" cy="150" r="42" fill="#d4441c" stroke="#1c1a17" stroke-width="5"/>
+        <!-- 红柱：贴着刻度区顶端，警戒感 -->
+        <rect x="138" y="196" width="24" height="130" rx="12" fill="#d4441c" fill-opacity="0.85"/>
+        <!-- 「收工」标注：球泡左侧，弯引线指向球泡 -->
+        <text x="86" y="122" font-size="26" fill="#d4441c" text-anchor="end" font-family="Ma Shan Zheng,cursive">收工</text>
+        <path d="M96 130 q 20 10 32 26" stroke="#d4441c" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+        <!-- 刻度 1（最靠近红区） -->
+        <line x1="172" y1="248" x2="204" y2="248" stroke="#1c1a17" stroke-width="4" stroke-linecap="round"/>
+        <text x="216" y="240" font-size="23" fill="#1c1a17">平台警告「上下文吃紧」</text>
+        <text x="216" y="270" font-size="19" fill="#9a9286">见到即收，别指望压缩后还能干净地继续</text>
+
+        <!-- 刻度 2 -->
+        <line x1="172" y1="342" x2="204" y2="342" stroke="#1c1a17" stroke-width="4" stroke-linecap="round"/>
+        <text x="216" y="334" font-size="23" fill="#1c1a17">同一个测试，连续 3 次修不绿</text>
+        <text x="216" y="364" font-size="19" fill="#9a9286">说明在打转</text>
+
+        <!-- 刻度 3 -->
+        <line x1="172" y1="436" x2="204" y2="436" stroke="#1c1a17" stroke-width="4" stroke-linecap="round"/>
+        <text x="216" y="428" font-size="23" fill="#1c1a17">同一个文件被整体重写 ≥ 2 次</text>
+        <text x="216" y="458" font-size="19" fill="#9a9286">整写一次，就是上万 token 的输出</text>
+
+        <!-- 刻度 4 -->
+        <line x1="172" y1="530" x2="204" y2="530" stroke="#1c1a17" stroke-width="4" stroke-linecap="round"/>
+        <text x="216" y="522" font-size="23" fill="#1c1a17">3 个 TDD 循环还没收口</text>
+        <text x="216" y="552" font-size="19" fill="#9a9286">多半是这片切大了</text>
+
+        <!-- 刻度 5 -->
+        <line x1="172" y1="624" x2="204" y2="624" stroke="#1c1a17" stroke-width="4" stroke-linecap="round"/>
+        <text x="216" y="616" font-size="23" fill="#1c1a17">测试 / 构建命令，累计 ≥ 6 次</text>
+        <text x="216" y="646" font-size="19" fill="#9a9286">验证也在悄悄积累上下文</text>
+
+        <!-- 刻度 6 -->
+        <line x1="172" y1="718" x2="204" y2="718" stroke="#1c1a17" stroke-width="4" stroke-linecap="round"/>
+        <text x="216" y="710" font-size="23" fill="#1c1a17">改动文件，累计 ≥ 8 个</text>
+        <text x="216" y="740" font-size="19" fill="#9a9286">这片已经不小了</text>
+
+        <text x="150" y="856" font-size="20" fill="#9a9286" text-anchor="middle">任一命中，立刻收工</text>
+      </g>
+
+      <!-- ================= 右列：收工之后 ================= -->
+      <g>
+        <text x="628" y="248" font-size="34" fill="#1c1a17" font-family="Ma Shan Zheng,cursive">收工，不是失败</text>
+        <!-- handoff 卡 -->
+        <rect x="612" y="286" width="288" height="270" rx="14" stroke="#1c1a17" stroke-width="4.5" fill="#fffdf8" transform="rotate(1 756 421)"/>
+        <text x="756" y="332" font-size="24" fill="#d4441c" text-anchor="middle">写 handoff 交棒</text>
+        <line x1="640" y1="352" x2="872" y2="352" stroke="#ddd4c4" stroke-width="3"/>
+        <text x="644" y="392" font-size="21" fill="#4a4238">· 干了什么，改了哪些文件</text>
+        <text x="644" y="432" font-size="21" fill="#4a4238">· 还剩什么，下一片从哪进</text>
+        <text x="644" y="472" font-size="21" fill="#4a4238">· 关键决定</text>
+        <text x="644" y="512" font-size="21" fill="#4a4238">· 范围外发现，只记不做</text>
+
+        <text x="628" y="620" font-size="22" fill="#1c1a17">干完＝ success，</text>
+        <text x="628" y="654" font-size="22" fill="#1c1a17">预算到点＝ checkpoint，</text>
+        <text x="628" y="688" font-size="22" fill="#1c1a17">都由编排派下一棒。</text>
+        <text x="628" y="736" font-size="20" fill="#9a9286">换一个新 agent 接，</text>
+        <text x="628" y="766" font-size="20" fill="#9a9286">比让老的扛着继续便宜。</text>
+      </g>
+
+      <!-- ================= 底部灰卡：省上下文纪律 ================= -->
+      <g>
+        <rect x="40" y="880" width="856" height="106" rx="14" fill="#f0ece4"/>
+        <text x="76" y="920" font-size="25" fill="#1c1a17"><tspan fill="#d4441c" font-weight="700">省上下文纪律</tspan>　每条都对着那张账单：</text>
+        <text x="76" y="952" font-size="20" fill="#4a4238">改文件用 Edit，别整写（那次整写了 44 次）；定位用 Grep，别为「建立理解」通读；</text>
+        <text x="76" y="980" font-size="20" fill="#4a4238">超 2 分钟的 build 扔后台——前台空档一超时，缓存整段重付。</text>
+      </g>
+
+    </svg>
+  </div>
+
+  <div class="foot">
+    <div class="sig"><span class="bar"></span>Khan驾到<span class="theme">怎样让人和 Agent 协作得更好？</span></div>
+    <div class="entag">WHEN TO STOP</div>
+  </div>
+
+</div>
+</body>
+</html>

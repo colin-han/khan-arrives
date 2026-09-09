@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>一小时 $46，烧在哪了</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@chinese-fonts/lxgwwenkaibright@2.0.0/dist/LXGWBright-Regular/result.css" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1080px;height:1440px;}
+  body{
+    background-color:#faf7f2;
+    font-family:"LXGW Bright","PingFang SC",sans-serif;
+    color:#231709; position:relative; overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05; mix-blend-mode:multiply;
+  }
+  .page{position:relative; padding:60px 72px 44px; height:1440px; display:flex; flex-direction:column;}
+  header{position:relative;}
+  .title{font-family:"Ma Shan Zheng",cursive; font-size:82px; line-height:1.05; color:#1c1a17; letter-spacing:0.03em;}
+  .subtitle{font-family:"SF Mono",Menlo,monospace; font-size:24px; color:#d4441c; margin-top:10px; letter-spacing:0.04em;}
+  .chart{flex:1; display:flex; align-items:center; margin-top:8px;}
+  .chart svg{width:100%; height:auto; display:block;}
+  .foot{margin-top:14px; display:flex; justify-content:space-between; align-items:center;}
+  .sig{display:flex; align-items:center; gap:14px; font-family:"Songti SC",serif; font-weight:700; font-size:26px;}
+  .sig .bar{width:26px;height:2px;background:#d4441c;display:inline-block;}
+  .sig .theme{font-family:"LXGW Bright","PingFang SC",sans-serif; font-weight:400; font-size:21px; color:#9a9286;}
+  .entag{font-size:20px; letter-spacing:0.32em; color:#9a9286;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="title">一小时 $46，烧在哪了</div>
+    <div class="subtitle">grafana / two impl subagents / overnight &amp; morning</div>
+  </header>
+
+  <div class="chart">
+    <svg viewBox="0 0 936 1000" fill="none">
+
+      <!-- ================= 左：账单收据 ================= -->
+      <g transform="rotate(-1.2 260 470)">
+        <path d="M40 60 L470 60 L470 862 L416 886 L362 862 L308 886 L254 862 L200 886 L146 862 L92 886 L40 862 Z"
+              fill="#fffdf8" stroke="#1c1a17" stroke-width="5" stroke-linejoin="round"/>
+        <text x="255" y="124" font-size="36" fill="#1c1a17" text-anchor="middle" font-family="Ma Shan Zheng,cursive">最贵的一小时</text>
+        <text x="255" y="158" font-size="19" fill="#9a9286" text-anchor="middle" font-family="SF Mono,Menlo,monospace">10:00 - 11:00 &middot; 55 requests</text>
+        <line x1="80" y1="184" x2="430" y2="184" stroke="#ddd4c4" stroke-width="3" stroke-dasharray="10 8"/>
+
+        <!-- item 1: 缓存失效整段重付 -->
+        <text x="80" y="238" font-size="24" fill="#1c1a17">缓存失效重付 ×6</text>
+        <text x="430" y="242" font-size="32" fill="#d4441c" text-anchor="end" font-family="Ma Shan Zheng,cursive">$28</text>
+        <text x="80" y="272" font-size="19" fill="#9a9286">空档超时，20~42 万 token 整段重写</text>
+        <g transform="rotate(-4 352 306)">
+          <text x="352" y="310" font-size="26" fill="#d4441c" font-family="Ma Shan Zheng,cursive">六成！</text>
+          <path d="M312 318 q 40 14 96 2" stroke="#d4441c" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </g>
+        <line x1="80" y1="348" x2="430" y2="348" stroke="#ece4d4" stroke-width="2.5"/>
+
+        <!-- item 2: 整文件重写 -->
+        <text x="80" y="402" font-size="24" fill="#1c1a17">整文件重写 ×44</text>
+        <text x="430" y="404" font-size="22" fill="#4a4238" text-anchor="end">22 万 tok</text>
+        <text x="80" y="436" font-size="19" fill="#9a9286">改几行也整个重写，输出就堆起来了</text>
+        <line x1="80" y1="472" x2="430" y2="472" stroke="#ece4d4" stroke-width="2.5"/>
+
+        <!-- item 3: 巨型上下文读缓存 -->
+        <text x="80" y="526" font-size="24" fill="#1c1a17">大上下文读缓存 ×55</text>
+        <text x="430" y="528" font-size="20" fill="#4a4238" text-anchor="end">$0.1~0.3/次</text>
+        <text x="80" y="560" font-size="19" fill="#9a9286">上下文越大，每次起步越贵</text>
+        <line x1="80" y1="596" x2="430" y2="596" stroke="#ece4d4" stroke-width="2.5"/>
+
+        <!-- item 4: away summary -->
+        <text x="80" y="650" font-size="24" fill="#1c1a17">摘要 97 个 token</text>
+        <text x="430" y="654" font-size="32" fill="#d4441c" text-anchor="end" font-family="Ma Shan Zheng,cursive">$4.39</text>
+        <text x="80" y="684" font-size="19" fill="#9a9286">跑在 43.7 万 token 的上下文上</text>
+        <g transform="rotate(-3 340 720)">
+          <text x="340" y="724" font-size="24" fill="#d4441c" font-family="Ma Shan Zheng,cursive">最离谱的一笔</text>
+          <path d="M290 732 q 60 12 118 0" stroke="#d4441c" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </g>
+
+        <!-- total -->
+        <line x1="80" y1="764" x2="430" y2="764" stroke="#1c1a17" stroke-width="4"/>
+        <text x="80" y="822" font-size="30" fill="#1c1a17">合计</text>
+        <text x="430" y="830" font-size="62" fill="#d4441c" text-anchor="end" font-family="Ma Shan Zheng,cursive">$46</text>
+        <text x="255" y="852" font-size="19" fill="#9a9286" text-anchor="middle">≈ 5 小时配额的九成</text>
+      </g>
+
+      <!-- ================= 右上：雪球（复利根因） ================= -->
+      <g>
+        <text x="540" y="110" font-size="34" fill="#1c1a17" font-family="Ma Shan Zheng,cursive">为什么越跑越贵？</text>
+        <!-- 三个越来越大的雪球，中间手绘箭头 -->
+        <circle cx="586" cy="222" r="34" fill="#fffdf8" stroke="#1c1a17" stroke-width="4"/>
+        <text x="586" y="230" font-size="19" fill="#4a4238" text-anchor="middle">5万</text>
+        <path d="M632 216 q 36 -12 66 -2" stroke="#9a9286" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M692 204 l -12 -8 M692 204 l -10 10" stroke="#9a9286" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="742" cy="218" r="52" fill="#fffdf8" stroke="#1c1a17" stroke-width="4.5"/>
+        <text x="742" y="226" font-size="21" fill="#4a4238" text-anchor="middle">25万</text>
+        <path d="M802 210 q 34 -8 58 2" stroke="#9a9286" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M854 208 l -12 -8 M854 208 l -9 11" stroke="#9a9286" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="878" cy="222" r="56" fill="#d4441c" fill-opacity="0.12" stroke="#d4441c" stroke-width="5"/>
+        <text x="878" y="230" font-size="22" fill="#d4441c" text-anchor="middle" font-weight="700">44万</text>
+        <!-- 地面 -->
+        <path d="M520 288 C 620 282, 760 290, 920 284" stroke="#1c1a17" stroke-width="3.5" stroke-dasharray="12 10" stroke-linecap="round"/>
+        <text x="540" y="348" font-size="24" fill="#1c1a17">每走一步，</text>
+        <text x="540" y="384" font-size="24" fill="#1c1a17">都要把攒下的全部重读一遍。</text>
+        <text x="540" y="420" font-size="21" fill="#9a9286">所以上下文的钱是复利，不是线性。</text>
+      </g>
+
+      <!-- ================= 右中：22 分钟空档时间线 ================= -->
+      <g>
+        <text x="540" y="502" font-size="34" fill="#1c1a17" font-family="Ma Shan Zheng,cursive">最贵的一次卡顿</text>
+        <line x1="556" y1="556" x2="890" y2="556" stroke="#1c1a17" stroke-width="4" stroke-linecap="round"/>
+        <line x1="640" y1="556" x2="812" y2="556" stroke="#d4441c" stroke-width="9" stroke-linecap="round"/>
+        <circle cx="556" cy="556" r="9" fill="#1c1a17"/>
+        <circle cx="890" cy="556" r="9" fill="#1c1a17"/>
+        <text x="556" y="530" font-size="21" fill="#4a4238" font-family="SF Mono,Menlo,monospace">02:20</text>
+        <text x="890" y="530" font-size="21" fill="#4a4238" text-anchor="end" font-family="SF Mono,Menlo,monospace">02:42</text>
+        <text x="726" y="530" font-size="22" fill="#d4441c" text-anchor="middle">22 分钟空档</text>
+        <text x="556" y="598" font-size="20" fill="#9a9286">前台跑 gradle，卡住了；</text>
+        <text x="556" y="630" font-size="20" fill="#9a9286">空档超过缓存保留期——</text>
+        <text x="556" y="676" font-size="24" fill="#1c1a17">下一次请求：30 万 token</text>
+        <text x="556" y="710" font-size="24" fill="#1c1a17">整段重付</text>
+        <text x="890" y="710" font-size="44" fill="#d4441c" text-anchor="end" font-family="Ma Shan Zheng,cursive">$4.11</text>
+      </g>
+
+      <!-- ================= 右下：看不见 ================= -->
+      <g>
+        <text x="540" y="792" font-size="30" fill="#1c1a17" font-family="Ma Shan Zheng,cursive">这笔账，我看不见</text>
+        <text x="540" y="834" font-size="21" fill="#9a9286">主线程一晚上没说一句话，</text>
+        <text x="540" y="868" font-size="21" fill="#9a9286">一直在等它们回报。</text>
+        <!-- 眯眼小脸：看不见 -->
+        <circle cx="846" cy="818" r="44" fill="#fffdf8" stroke="#1c1a17" stroke-width="4"/>
+        <path d="M820 810 q 8 6 16 0 M856 810 q 8 6 16 0" stroke="#1c1a17" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M832 836 q 14 10 28 0" stroke="#1c1a17" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <!-- ================= 底部灰卡 ================= -->
+      <rect x="40" y="920" width="856" height="72" rx="14" fill="#f0ece4"/>
+      <text x="76" y="966" font-size="25" fill="#1c1a17">保护主上下文没问题——但 subagent 自己的上下文，也是钱。</text>
+
+    </svg>
+  </div>
+
+  <div class="foot">
+    <div class="sig"><span class="bar"></span>Khan驾到<span class="theme">怎样让人和 Agent 协作得更好？</span></div>
+    <div class="entag">WHERE IT WENT</div>
+  </div>
+
+</div>
+</body>
+</html>
